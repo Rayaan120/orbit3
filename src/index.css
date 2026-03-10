@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-deep-space text-starlight font-sans overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight text-white;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  }
+
+  .glass-card {
+    @apply bg-deep-space/60 backdrop-blur-xl border border-white/10 hover:border-cosmic-blue/50 transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-cosmic-blue via-starlight to-nebula-purple;
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-orbit-gold to-yellow-200;
+  }
+
+  .neon-border {
+    @apply relative before:absolute before:-inset-[1px] before:rounded-lg before:bg-gradient-to-r before:from-cosmic-blue before:via-nebula-purple before:to-orbit-gold before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 after:absolute after:inset-0 after:bg-deep-space after:rounded-lg;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 15px theme('colors.cosmic-blue'), inset 0 0 15px theme('colors.cosmic-blue');
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: theme('colors.deep-space');
+}
+
+::-webkit-scrollbar-thumb {
+  background: theme('colors.nebula-purple');
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.cosmic-blue');
+}
+
+/* Selection */
+::selection {
+  background: theme('colors.cosmic-blue');
+  color: theme('colors.deep-space');
+}
