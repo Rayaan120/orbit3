@@ -1,101 +1,409 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Telescope, Shield, Users } from 'lucide-react';
-
+import { Sparkles, Telescope, Shield, Users, Activity, Globe, Zap, Database } from 'lucide-react';
+import StarBackground from '../components/home/StarBackground';
+import WhyChooseMissionControl from '../components/home/WhyChooseMissionControl';
+import CtaSection from '../components/home/CtaSection';
 const values = [
-    { icon: Sparkles, title: "Innovation", desc: "Pushing the boundaries of what's possible." },
-    { icon: Telescope, title: "Vision", desc: "Seeing the big picture and microscopic details." },
-    { icon: Shield, title: "Precision", desc: "Flawless execution of complex missions." },
-    { icon: Users, title: "Collaboration", desc: "Partnering seamlessly with our clients." },
+    { 
+        id: "01",
+        icon: Shield, 
+        title: "Precision Execution", 
+        desc: "Every detail matters. We plan, manage, and deliver with absolute accuracy to ensure flawless event experiences.",
+        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        col: "lg:col-span-7",
+        theme: "group-hover:text-nebula-purple",
+        glow: "group-hover:shadow-[inset_0_0_80px_rgba(139,92,246,0.25)]",
+        border: "group-hover:border-nebula-purple/50"
+    },
+    { 
+        id: "02",
+        icon: Sparkles, 
+        title: "Creative Innovation", 
+        desc: "We go beyond conventional ideas—crafting unique, forward-thinking concepts that make every event stand out.",
+        image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        col: "lg:col-span-5",
+        theme: "group-hover:text-cosmic-blue",
+        glow: "group-hover:shadow-[inset_0_0_80px_rgba(79,209,255,0.25)]",
+        border: "group-hover:border-cosmic-blue/50"
+    },
+    { 
+        id: "03",
+        icon: Users, 
+        title: "Client-Centric Approach", 
+        desc: "Your vision drives everything we do. We collaborate closely to turn your ideas into impactful, memorable experiences.",
+        image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        col: "lg:col-span-5",
+        theme: "group-hover:text-orbit-gold",
+        glow: "group-hover:shadow-[inset_0_0_80px_rgba(251,191,36,0.25)]",
+        border: "group-hover:border-orbit-gold/50"
+    },
+    { 
+        id: "04",
+        icon: Activity, 
+        title: "Reliability & Control", 
+        desc: "Like mission control, we stay in command at every stage—ensuring timelines, quality, and execution are always on track.",
+        image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+        col: "lg:col-span-7",
+        theme: "group-hover:text-cyan-400",
+        glow: "group-hover:shadow-[inset_0_0_80px_rgba(34,211,238,0.25)]",
+        border: "group-hover:border-cyan-400/50"
+    },
 ];
 
 export default function About() {
     return (
-        <div className="bg-deep-space min-h-screen pt-24 pb-32">
+        <div className="bg-deep-space min-h-screen pb-32">
             {/* Hero Section */}
-            <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden border-b border-white/10">
-                <div className="absolute inset-0 z-0 opacity-40">
-                    <img
-                        src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
-                        alt="Earth from space"
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-deep-space via-deep-space/80 to-transparent" />
+            <section className="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden border-b border-white/5">
+                <div className="absolute inset-0 z-0">
+                    <StarBackground />
+                </div>
+                
+                {/* Holographic Radar/Grid Elements */}
+                <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+                    <div className="absolute w-[800px] h-[800px] border border-white/5 rounded-full" />
+                    <div className="absolute w-[600px] h-[600px] border border-white/5 rounded-full" />
+                    <div className="absolute w-[400px] h-[400px] border-[0.5px] border-cosmic-blue/20 rounded-full flex items-center justify-center">
+                        <motion.div 
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            className="w-full h-full rounded-full border-t border-cosmic-blue/50" 
+                        />
+                    </div>
+                    {/* Vertical / Horizontal Axis */}
+                    <div className="absolute w-full max-w-[1200px] h-[1px] bg-white/5" />
+                    <div className="absolute h-full max-h-[1200px] w-[1px] bg-white/5" />
                 </div>
 
-                <div className="relative z-10 text-center px-6">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-5xl md:text-7xl font-display font-bold tracking-tight mb-6"
+                <div className="relative z-10 text-center px-6 pb-20">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="flex flex-col items-center"
                     >
-                        Exploring the Universe of <br />
-                        <span className="text-gradient">Experiences</span>
-                    </motion.h1>
+                        <div className="hidden">
+                            {/* Removed badge as per user request */}
+                        </div>
+                        
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-light tracking-tight mb-6 leading-[1.1]">
+                            About <br /> 
+                            <span className="font-bold text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">Orbit</span> Events
+                        </h1>
+
+                        <p className="text-starlight/60 text-sm md:text-base max-w-2xl mx-auto font-light mt-6 font-mono tracking-widest uppercase leading-relaxed">
+                            At Orbit Events, we don’t just organize events—we engineer experiences. Driven by precision, creativity, and control, our team transforms ideas into seamless, high-impact moments that elevate brands and captivate audiences.
+                        </p>
+                    </motion.div>
+                </div>
+
+                {/* Decorative Tech Corner */}
+                <div className="absolute bottom-8 right-8 flex-col items-end hidden md:flex font-mono text-[10px] text-cosmic-blue/40 tracking-[0.2em] text-right">
+                    <span>SYS.REV: 9.4.2</span>
+                    <span>AUTHORIZATION: ALIGNED</span>
+                    <span>STATUS: NOMINAL</span>
                 </div>
             </section>
 
-            <div className="max-w-7xl mx-auto px-6 -mt-20 relative z-20">
-                {/* Story Section */}
-                <section className="mb-32">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="glass-card p-10 rounded-3xl"
-                        >
-                            <h2 className="text-3xl font-display font-bold mb-6 text-starlight">Our Story</h2>
-                            <p className="text-starlight/70 leading-relaxed mb-6 font-light">
-                                Founded on the principle that events should be more than just gatherings, Orbit Events was built to engineer immersive brand dimensions.
-                            </p>
-                            <p className="text-starlight/70 leading-relaxed font-light">
-                                We act as your dedicated space agency—planning, designing, and launching missions that captivate audiences and create gravitational pull for your brand.
-                            </p>
-                        </motion.div>
+            <div className="max-w-[1400px] mx-auto px-6 relative z-20">
+                {/* 
+                ====================================
+                REDESIGNED ORIGIN MODULE
+                ====================================
+                */}
+                <section className="relative mb-24 pt-8 md:pt-12">
+                    {/* Background decorative typography */}
+                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[15vw] font-display font-black text-white/[0.02] tracking-tighter leading-none select-none pointer-events-none z-0 whitespace-nowrap">
+                        THE ORIGIN
+                    </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="relative aspect-square rounded-3xl overflow-hidden glass-card border-none"
-                        >
-                            <img
-                                src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                                alt="Astronaut"
-                                className="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"
-                            />
-                            <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(11,15,26,1)]" />
-                        </motion.div>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center relative z-10">
+                        
+                        {/* Left: The Astronaut Capsule Container */}
+                        <div className="lg:col-span-5 relative group w-full max-w-[400px] lg:max-w-none mx-auto">
+                            {/* Ambient Glow */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-cosmic-blue/30 to-nebula-purple/30 blur-[100px] opacity-40 group-hover:opacity-70 transition-opacity duration-1000 pointer-events-none" />
+                            
+                            {/* Capsule Container */}
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1 }}
+                                className="relative aspect-[4/5] rounded-[150px] p-2 border border-white/10 bg-[#060913]/80 backdrop-blur-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]"
+                            >
+                                {/* Revolving border rings */}
+                                <div className="absolute inset-0 border-2 border-dashed border-white/20 rounded-[150px] animate-[spin_30s_linear_infinite] opacity-30 pointer-events-none" />
+                                
+                                {/* Inner Image Mask */}
+                                <div className="relative w-full h-full rounded-[140px] overflow-hidden border border-white/20 z-10 bg-black">
+                                    {/* Tech Grid Overlay inside image */}
+                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:2rem_2rem] z-20 pointer-events-none opacity-50 mix-blend-overlay" />
+                                    
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                        className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[2s] grayscale-[40%] group-hover:grayscale-0 relative z-10 opacity-90" 
+                                        alt="Astronaut floating"
+                                    />
+                                    {/* Cinematic Gradient Fade */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent z-20 pointer-events-none" />
+                                </div>
+                            </motion.div>
+
+                            {/* Floating HUD Elements */}
+                            <motion.div
+                                className="absolute -right-4 md:-right-10 top-[20%] w-28 h-28 md:w-36 md:h-36 rounded-full bg-black/80 backdrop-blur-xl border border-cosmic-blue/50 flex flex-col items-center justify-center z-30 shadow-[0_0_30px_rgba(79,209,255,0.3)]"
+                                animate={{ y: [-15, 15, -15] }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                            >
+                                <div className="absolute inset-2 rounded-full border border-dashed border-cosmic-blue/40 animate-[spin_10s_linear_infinite]" />
+                                <span className="text-4xl md:text-5xl font-display font-black text-white leading-none drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">10</span>
+                                <span className="text-[8px] md:text-[10px] tracking-[0.2em] text-cosmic-blue uppercase mt-1 text-center font-mono">Years<br/>Orbit</span>
+                            </motion.div>
+
+                            {/* Removed purple activity icon */}
+                        </div>
+
+                        {/* Right: Architectural Content Structure */}
+                        <div className="lg:col-span-7 lg:pl-12 flex flex-col justify-center">
+                            
+                            <motion.div 
+                                initial={{ opacity: 0, x: 40 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                className="flex flex-col gap-8 md:gap-12"
+                            >
+                                {/* Header Block */}
+                                <div className="relative">
+                                    {/* Architectural Timeline Line (Desktop Only) */}
+                                    <div className="absolute -left-12 top-4 bottom-[-40px] w-[2px] bg-gradient-to-b from-cosmic-blue via-cosmic-blue/20 to-transparent hidden lg:block" />
+                                    <div className="absolute -left-[51px] top-4 w-3 h-3 rounded-full bg-cosmic-blue shadow-[0_0_15px_#4FD1FF] hidden lg:block border-[3px] border-[#060913]" />
+                                    
+                                    <div className="hidden">
+                                        {/* Removed protocol badge */}
+                                    </div>
+                                    
+                                    <h2 className="text-5xl md:text-6xl lg:text-[80px] font-display font-black text-white leading-[1.05] tracking-tighter mb-4">
+                                        Who We <br />
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-blue via-white to-cosmic-blue/40 italic font-light">Are?</span>
+                                    </h2>
+                                </div>
+
+                                {/* Narrative Panel (Glassmorphic Data Block) */}
+                                <div className="bg-[#0A0E17]/60 backdrop-blur-2xl p-8 md:p-12 rounded-[2.5rem] border border-white/10 relative group overflow-hidden shadow-2xl">
+                                    {/* Tech Scanline overlay */}
+                                    <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
+                                    
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-cosmic-blue/10 blur-[80px] group-hover:bg-cosmic-blue/20 transition-colors duration-700 rounded-full pointer-events-none" />
+                                    
+                                    {/* Decorative Corner Brackets */}
+                                    <div className="absolute top-8 left-8 w-6 h-6 border-t-2 border-l-2 border-cosmic-blue/40 transition-all duration-500 group-hover:scale-110 group-hover:border-cosmic-blue" />
+                                    <div className="absolute bottom-8 right-8 w-6 h-6 border-b-2 border-r-2 border-cosmic-blue/40 transition-all duration-500 group-hover:scale-110 group-hover:border-cosmic-blue" />
+
+                                    <div className="relative z-10 px-4 py-2">
+                                        <p className="text-xl md:text-3xl text-white font-light leading-relaxed mb-6 font-display tracking-tight">
+                                            Founded on the principle that events should be more than just gatherings, Orbit Events was built to engineer immersive brand dimensions.
+                                        </p>
+                                        <p className="text-starlight/60 font-light leading-relaxed font-sans text-sm md:text-base">
+                                            Like a dedicated space agency, we meticulously plan, design, and execute missions that captivate audiences, defy conventional expectations, and create inescapable gravitational pull for your brand. Our coordinates are forever set to the future. <br/><br/><strong className="text-white font-medium text-lg uppercase tracking-widest font-mono">We don't just host—we launch.</strong>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Metrics Grid */}
+                                <div className="grid grid-cols-2 gap-4 md:gap-6">
+                                    
+                                    {/* Metric 1 */}
+                                    <div className="bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-xl p-6 md:p-8 rounded-[2rem] border border-white/5 flex flex-col justify-center items-start group hover:border-white/20 transition-all duration-500 overflow-hidden relative shadow-xl">
+                                        <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-700 pointer-events-none">
+                                            <Zap size={140} />
+                                        </div>
+                                        <div className="hidden">
+                                            {/* Removed yellow zap icon */}
+                                        </div>
+                                        <span className="text-5xl md:text-6xl font-display font-black text-white mb-2 tracking-tighter">150+</span>
+                                        <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40 group-hover:text-white/70 transition-colors leading-relaxed">Successful Events<br/>Delivered</span>
+                                    </div>
+
+                                    {/* Metric 2 */}
+                                    <div className="bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-xl p-6 md:p-8 rounded-[2rem] border border-white/5 flex flex-col justify-center items-start group hover:border-white/20 transition-all duration-500 overflow-hidden relative shadow-xl">
+                                        <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-700 pointer-events-none">
+                                            <Globe size={140} />
+                                        </div>
+                                        <div className="hidden">
+                                            {/* Removed blue globe icon */}
+                                        </div>
+                                        <span className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-white mb-2 tracking-tighter leading-none">Global <br/><span className="text-cosmic-blue italic font-light">Presence</span></span>
+                                        <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40 group-hover:text-white/70 transition-colors leading-relaxed">Executing Events<br/>Worldwide</span>
+                                    </div>
+
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
                 </section>
 
-                {/* Values Section */}
-                <section>
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-display font-bold text-starlight mb-4">Core <span className="text-gradient-gold">Values</span></h2>
-                        <p className="text-starlight/50">The principles that guide our every launch.</p>
+                {/* 
+                ====================================
+                IMPROVISED VALUES SECTION
+                ====================================
+                */}
+                <section className="mb-12 relative overflow-hidden pt-12 pb-16 rounded-[4rem]">
+                    {/* Cinematic Moving Deep Space Background */}
+                    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-transparent to-deep-space z-10" />
+                        
+                        {/* Realistic Moving Starfield */}
+                        <div className="absolute inset-0 opacity-60">
+                            <StarBackground />
+                        </div>
+                        
+                        {/* Animated Nebula Glows / Moving Clouds */}
+                        <motion.div 
+                            className="absolute top-0 left-0 w-[800px] h-[800px] bg-cosmic-blue/10 rounded-full blur-[150px]" 
+                            animate={{ 
+                                x: [0, 100, 0],
+                                y: [0, -50, 0],
+                                scale: [1, 1.2, 1],
+                                opacity: [0.5, 0.8, 0.5]
+                            }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                        <motion.div 
+                            className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-nebula-purple/10 rounded-full blur-[150px]" 
+                            animate={{ 
+                                x: [0, -100, 0],
+                                y: [0, 50, 0],
+                                scale: [1, 1.5, 1],
+                                opacity: [0.3, 0.6, 0.3]
+                            }}
+                            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                        />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    {/* Architectural background lines */}
+                    <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-white/5 via-white/5 to-transparent z-10 hidden lg:block" />
+
+                    <div className="text-center mb-12 relative">
+                        <div className="hidden">
+                            {/* Removed operational DNA badge */}
+                        </div>
+                        
+                        <motion.h2 
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-5xl md:text-8xl font-display font-black text-white mb-6 tracking-tighter"
+                        >
+                            Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/50 to-white/20 italic">Values</span>
+                        </motion.h2>
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            className="text-starlight/40 max-w-2xl mx-auto font-light tracking-widest uppercase text-[10px] md:text-xs leading-relaxed"
+                        >
+                            Built on precision, innovation, and control, our core values guide every Orbit Event—ensuring seamless execution, elevated experiences, and results that leave a lasting impact.
+                        </motion.p>
+                    </div>
+
+                    {/* Satellite Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-32 gap-x-20 lg:gap-x-48 relative z-10 pt-0 px-4 lg:px-12">
                         {values.map((val, i) => (
                             <motion.div
                                 key={val.title}
-                                initial={{ opacity: 0, y: 30 }}
+                                initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="glass-card p-8 rounded-2xl group hover:-translate-y-2 transition-transform duration-300 relative overflow-hidden"
+                                viewport={{ once: true, margin: "-100px" }}
+                                transition={{ duration: 0.8, delay: i * 0.15 }}
+                                className="group relative flex items-center justify-center h-[500px]"
                             >
-                                <div className="absolute top-0 right-0 w-32 h-32 bg-cosmic-blue/5 rounded-full blur-[30px] -mr-16 -mt-16 transition-all group-hover:bg-cosmic-blue/20" />
-                                <val.icon size={32} className="text-cosmic-blue mb-6 group-hover:scale-110 transition-transform" />
-                                <h3 className="text-xl font-display font-semibold mb-3">{val.title}</h3>
-                                <p className="text-starlight/60 text-sm leading-relaxed">{val.desc}</p>
+                                {/* Left Solar Wing */}
+                                <div className="absolute left-[-20px] md:left-[-40px] lg:left-[-60px] top-1/2 -translate-y-1/2 w-[80px] md:w-[120px] lg:w-[160px] h-[180px] md:h-[220px] lg:h-[260px] z-0 transition-transform duration-700 group-hover:-translate-x-4">
+                                    <div className="w-full h-full bg-cosmic-blue/10 backdrop-blur-md border border-cosmic-blue/30 relative overflow-hidden flex items-center justify-center">
+                                        <div className="absolute inset-0 bg-[linear-gradient(rgba(79,209,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(79,209,255,0.2)_1px,transparent_1px)] bg-[size:15px_15px] opacity-40" />
+                                        <div className="w-[80%] h-[2px] bg-cosmic-blue/40 shadow-[0_0_15px_#4FD1FF]" />
+                                    </div>
+                                    {/* Arm Connector */}
+                                    <div className="absolute right-[-15px] top-1/2 -translate-y-1/2 w-4 h-2 bg-white/20" />
+                                </div>
+
+                                {/* Right Solar Wing */}
+                                <div className="absolute right-[-20px] md:right-[-40px] lg:right-[-60px] top-1/2 -translate-y-1/2 w-[80px] md:w-[120px] lg:w-[160px] h-[180px] md:h-[220px] lg:h-[260px] z-0 transition-transform duration-700 group-hover:translate-x-4">
+                                    <div className="w-full h-full bg-cosmic-blue/10 backdrop-blur-md border border-cosmic-blue/30 relative overflow-hidden flex items-center justify-center">
+                                        <div className="absolute inset-0 bg-[linear-gradient(rgba(79,209,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(79,209,255,0.2)_1px,transparent_1px)] bg-[size:15px_15px] opacity-40" />
+                                        <div className="w-[80%] h-[2px] bg-cosmic-blue/40 shadow-[0_0_15px_#4FD1FF]" />
+                                    </div>
+                                    {/* Arm Connector */}
+                                    <div className="absolute left-[-15px] top-1/2 -translate-y-1/2 w-4 h-2 bg-white/20" />
+                                </div>
+
+                                {/* Central Satellite Body */}
+                                <div 
+                                    className="relative w-full max-w-[320px] md:max-w-[380px] h-full bg-[#0A0E17] border border-white/20 z-10 transition-all duration-700 group-hover:border-cosmic-blue group-hover:shadow-[0_0_80px_rgba(79,209,255,0.15)] flex flex-col items-center p-8 md:p-10 text-center"
+                                    style={{ clipPath: 'polygon(20% 0%, 80% 0%, 100% 15%, 100% 85%, 80% 100%, 20% 100%, 0% 85%, 0% 15%)' }}
+                                >
+                                    {/* Image Overlay with low opacity */}
+                                    <div className="absolute inset-0 z-0">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E17] via-[#0A0E17]/80 to-transparent z-10" />
+                                        <img 
+                                            src={val.image} 
+                                            alt={val.title}
+                                            className="w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-[2s]"
+                                        />
+                                    </div>
+
+                                    {/* Satellite Head (Communication Dish) */}
+                                    <div className="relative z-20 w-16 h-16 rounded-full border-2 border-cosmic-blue/50 flex items-center justify-center mb-8 bg-black group-hover:scale-110 transition-transform duration-500">
+                                        <div className="absolute inset-[-4px] rounded-full border border-dashed border-cosmic-blue/30 animate-[spin_15s_linear_infinite]" />
+                                        <val.icon size={28} className="text-cosmic-blue" />
+                                    </div>
+
+                                    {/* Text Content */}
+                                    <div className="relative z-20 flex-1 flex flex-col items-center">
+                                        <div className="text-[10px] font-mono text-cosmic-blue tracking-[0.4em] uppercase mb-2 opacity-60 group-hover:opacity-100 transition-opacity">Protocol {val.id}</div>
+                                        <h3 className="text-2xl md:text-3xl font-display font-black text-white mb-6 leading-tight">
+                                            {val.title}
+                                        </h3>
+                                        <div className="w-8 h-[2px] bg-white/10 mb-6 group-hover:w-20 group-hover:bg-cosmic-blue transition-all duration-500" />
+                                        <p className="text-starlight/60 text-sm md:text-base leading-relaxed font-light">
+                                            {val.desc}
+                                        </p>
+                                    </div>
+
+                                    {/* Bottom Tech Detail */}
+                                    <div className="relative z-20 mt-6 flex flex-col items-center gap-2">
+                                        <div className="flex gap-1">
+                                            {[...Array(5)].map((_, j) => (
+                                                <div key={j} className="w-1 h-1 rounded-full bg-cosmic-blue shadow-[0_0_5px_#4FD1FF]" />
+                                            ))}
+                                        </div>
+                                        <span className="text-[8px] font-mono text-white/20 uppercase tracking-widest">Active Transmission</span>
+                                    </div>
+                                </div>
+
+                                {/* Bottom Glow Ambient */}
+                                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-cosmic-blue/5 blur-[50px] -z-10 group-hover:bg-cosmic-blue/20 transition-colors duration-1000" />
                             </motion.div>
                         ))}
                     </div>
                 </section>
             </div>
+            
+            <WhyChooseMissionControl />
+            
+            <CtaSection />
+            
+            <style jsx>{`
+                @keyframes scanline {
+                    0% { top: 0%; opacity: 0; }
+                    5% { opacity: 1; }
+                    95% { opacity: 1; }
+                    100% { top: 100%; opacity: 0; }
+                }
+            `}</style>
         </div>
     );
 }

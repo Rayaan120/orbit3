@@ -1,66 +1,90 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Rocket, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ChevronDown } from 'lucide-react';
+import EarthCanvas from './EarthCanvas';
+import astronautImg from '../../assets/astronaut.png';
 
 export default function Hero() {
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-nebula-purple/20 rounded-full blur-[150px] mix-blend-screen" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cosmic-blue/10 rounded-full blur-[120px] mix-blend-screen" />
+        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#030014]">
+            {/* Background glowing elements */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-nebula-purple/30 rounded-full blur-[150px] mix-blend-screen" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cosmic-blue/20 rounded-full blur-[120px] mix-blend-screen" />
             </div>
 
             {/* Orbit Rings Background */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl pointer-events-none z-0">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl pointer-events-none z-0 opacity-40">
                 <div className="absolute inset-0 border-[0.5px] border-white/5 rounded-full animate-orbit" style={{ animationDuration: '40s' }} />
                 <div className="absolute inset-8 border-[0.5px] border-cosmic-blue/10 rounded-full animate-orbit" style={{ animationDuration: '30s', animationDirection: 'reverse' }} />
                 <div className="absolute inset-16 border-[0.5px] border-nebula-purple/10 rounded-full animate-orbit" style={{ animationDuration: '25s' }} />
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orbit-gold/30 bg-orbit-gold/10 text-orbit-gold text-sm font-medium tracking-wide backdrop-blur-md"
-                >
-                    <Rocket size={16} />
-                    <span>Space Agency for Brand Experiences</span>
-                </motion.div>
+            {/* The 3D Rotating Earth Background */}
+            <div className="absolute inset-0 z-10">
+                <EarthCanvas />
+            </div>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-display font-bold tracking-tight mb-8 leading-tight"
-                >
-                    Welcome to the <br />
-                    <span className="text-gradient">Event Universe</span>
-                </motion.h1>
+            <div className="relative z-20 max-w-[90rem] w-full mx-auto px-6 h-full flex flex-col lg:flex-row items-center pointer-events-none">
+                {/* Left Side: Astronaut */}
+                <div className="w-full lg:w-1/2 h-full flex items-center justify-center relative pointer-events-none lg:-ml-20">
+                    <motion.div
+                        animate={{ 
+                            y: [0, -25, 0],
+                            rotate: [0, 3, -2, 0]
+                        }}
+                        transition={{ 
+                            duration: 8, 
+                            repeat: Infinity, 
+                            ease: "easeInOut" 
+                        }}
+                        className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px] z-20"
+                    >
+                        <img 
+                            src={astronautImg} 
+                            alt="Astronaut floating" 
+                            className="w-full h-full object-contain filter drop-shadow-[0_0_50px_rgba(0,150,255,0.4)]"
+                        />
+                    </motion.div>
+                </div>
 
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.4 }}
-                    className="text-lg md:text-xl text-starlight/70 max-w-2xl mb-12"
-                >
-                    Orbit Events designs extraordinary brand experiences that move beyond gravity and into unforgettable moments.
-                </motion.p>
+                {/* Typography Block - Aligned to the right */}
+                <div className="w-full lg:w-[45%] flex flex-col justify-center items-start lg:ml-auto mt-10 lg:mt-0 relative z-20">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                        className="text-7xl md:text-8xl lg:text-[130px] font-display tracking-tight mb-6 leading-[0.9] text-white flex flex-col uppercase"
+                    >
+                        <span className="font-light text-transparent" style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.9)' }}>
+                            WE ARE
+                        </span>
+                        <span className="font-extrabold tracking-tighter">
+                            ORBIT!
+                        </span>
+                    </motion.h1>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.6 }}
-                    className="flex flex-col sm:flex-row gap-6"
-                >
-                    <button className="px-8 py-4 rounded-full bg-starlight text-deep-space font-semibold font-display tracking-wide hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all hover:-translate-y-1">
-                        Explore Our Universe
-                    </button>
-                    <button className="px-8 py-4 rounded-full border border-cosmic-blue/50 text-cosmic-blue font-semibold font-display tracking-wide neon-glow hover:bg-cosmic-blue/10 transition-all hover:-translate-y-1">
-                        Start Your Mission
-                    </button>
-                </motion.div>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 0.4 }}
+                        className="text-lg md:text-xl text-white/95 max-w-lg mb-10 font-medium leading-relaxed"
+                    >
+                        We are excited to begin our space odyssey that takes off the ground exploring uncharted regions of the event universe bringing your ideas to life.
+                    </motion.p>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.6 }}
+                        className="pointer-events-auto"
+                    >
+                        <Link to="/services" className="px-8 py-3.5 border border-white text-white text-sm font-semibold tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-4">
+                            EXPLORE MORE <span className="text-xl leading-none">→</span>
+                        </Link>
+                    </motion.div>
+                </div>
             </div>
 
             {/* Scroll indicator */}

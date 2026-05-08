@@ -53,12 +53,13 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme('colors.nebula-purple');
+  background: theme('colors.cosmic-blue');
   border-radius: 4px;
+  opacity: 0.8;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.cosmic-blue');
+  background: #73e0ff; /* A slightly brighter version of cosmic-blue (#4FD1FF) */
 }
 
 /* Selection */

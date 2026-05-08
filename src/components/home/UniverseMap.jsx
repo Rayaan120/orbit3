@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, X } from 'lucide-react';
+import StarBackground from './StarBackground';
 
 const planets = [
     { id: 1, name: "Neon Nights", x: 20, y: 30, size: "w-8 h-8", color: "from-blue-400 to-indigo-600", shadow: "shadow-blue-500/50", details: "Brand activation in Neo Tokyo. 10k attendees." },
@@ -14,6 +15,7 @@ export default function UniverseMap() {
 
     return (
         <section className="py-24 relative overflow-hidden bg-deep-space border-y border-white/5">
+            <StarBackground />
             <div className="max-w-7xl mx-auto px-6 mb-12 text-center">
                 <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Event <span className="text-gradient-gold">Universe Map</span></h2>
                 <p className="text-starlight/60 max-w-xl mx-auto text-lg">

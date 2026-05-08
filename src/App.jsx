@@ -11,7 +11,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
-import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ui/ScrollToTop';
 
@@ -24,7 +23,6 @@ function AnimatedRoutes() {
                 <Route path="/about" element={<PageTransition><About /></PageTransition>} />
                 <Route path="/services" element={<PageTransition><Services /></PageTransition>} />
                 <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
-                <Route path="/careers" element={<PageTransition><Careers /></PageTransition>} />
                 <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
             </Routes>
         </AnimatePresence>

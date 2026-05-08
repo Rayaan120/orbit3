@@ -8,7 +8,6 @@ const navLinks = [
     { title: "About", href: "/about" },
     { title: "Services", href: "/services" },
     { title: "Portfolio", href: "/portfolio" },
-    { title: "Careers", href: "/careers" },
     { title: "Contact", href: "/contact" }
 ];
 
@@ -34,23 +33,21 @@ export default function Navbar() {
     return (
         <>
             <motion.div
-                className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cosmic-blue via-nebula-purple to-orbit-gold origin-left z-50"
+                className="fixed top-0 left-0 right-0 h-1 bg-cosmic-blue origin-left z-50 shadow-[0_0_10px_#4FD1FF]"
                 style={{ scaleX }}
             />
 
-            <nav className={`fixed top-0 w-full z-40 transition-all duration-500 ${isScrolled ? 'bg-deep-space/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'}`}>
+            <nav className={`fixed top-0 w-full z-40 transition-all duration-500 ${isScrolled ? 'bg-deep-space/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-deep-space border-b border-white/5 py-6'}`}>
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-                    <Link to="/" className="text-2xl font-display font-bold text-starlight tracking-tight flex items-center gap-2 group">
-                        <div className="relative w-8 h-8 flex justify-center items-center">
-                            <motion.div
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                                className="absolute inset-0 rounded-full border border-cosmic-blue/50 border-t-cosmic-blue"
+                    <div className="relative w-56 md:w-[350px] h-12 flex items-center">
+                        <Link to="/" className="absolute left-0 top-1/2 -translate-y-[45%] transition-transform hover:scale-105 duration-300 z-50">
+                            <img 
+                                src="/logo.png" 
+                                alt="Orbit Events" 
+                                className="h-32 w-auto md:h-60 object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.25)]"
                             />
-                            <span className="w-4 h-4 rounded-full bg-cosmic-blue shadow-[0_0_10px_#4FD1FF]" />
-                        </div>
-                        <span>Orbit</span>
-                    </Link>
+                        </Link>
+                    </div>
 
                     {/* Desktop Nav */}
                     <div className="hidden md:flex items-center gap-8">
@@ -68,10 +65,7 @@ export default function Navbar() {
                                 />
                             </Link>
                         ))}
-                        <Link to="/contact" className="ml-4 px-6 py-2 rounded-full border border-white/20 glass hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all flex justify-center items-center relative overflow-hidden group">
-                            <span className="relative z-10 font-medium">Start Mission</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-cosmic-blue/20 to-nebula-purple/20 translate-x-[-100%] group-hover:translate-x-[0%] transition-transform duration-500" />
-                        </Link>
+
                     </div>
 
                     {/* Mobile Menu Toggle */}
