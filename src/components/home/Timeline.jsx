@@ -72,7 +72,7 @@ const steps = [
 
 export default function Timeline() {
     return (
-        <section className="pt-32 pb-16 relative bg-[#060913] overflow-hidden font-sans">
+        <section className="pt-12 pb-16 relative bg-[#060913] overflow-hidden font-sans">
             {/* High-tech grid background */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)] opacity-30 pointer-events-none"></div>
             

@@ -57,27 +57,6 @@ export default function Earth() {
                     blending={THREE.AdditiveBlending}
                 />
             </mesh>
-            <mesh position={[0, 0, 0]}>
-                <sphereGeometry args={[2.54, 64, 64]} />
-                <meshBasicMaterial
-                    color="#0066ff"
-                    transparent={true}
-                    opacity={0.15}
-                    blending={THREE.AdditiveBlending}
-                />
-            </mesh>
-
-            {/* Prominent blue outer atmospheric edge glow */}
-            <mesh position={[0, 0, 0]}>
-                <sphereGeometry args={[2.65, 64, 64]} />
-                <meshBasicMaterial
-                    color="#0088ff"
-                    transparent={true}
-                    opacity={0.3}
-                    side={THREE.BackSide}
-                    blending={THREE.AdditiveBlending}
-                />
-            </mesh>
         </group>
     );
 }
