@@ -16,6 +16,7 @@ export default function CtaSection() {
             <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
                 {/* Main Holographic Console */}
                 <motion.div
+                    id="contact-cta"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -35,7 +36,7 @@ export default function CtaSection() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
                         
-                        {/* Left Side: Telemetry / Header Text */}
+                        {/* Left Side: Humanized Header Text */}
                         <div className="space-y-8">
                             <motion.div 
                                 initial={{ opacity: 0, x: -20 }}
@@ -44,24 +45,25 @@ export default function CtaSection() {
                                 className="flex items-center gap-4 text-xs md:text-sm font-mono text-cosmic-blue uppercase tracking-[0.3em]"
                             >
                                 <span className="w-2 h-2 rounded-full bg-cosmic-blue animate-pulse shadow-[0_0_10px_rgba(64,166,255,0.8)]" />
-                                System Status: Online // Active
+                                Connection Port: Open // Ready
                             </motion.div>
                             
                             <h2 className="text-5xl md:text-7xl font-display font-light text-white leading-tight">
                                 Ready To <br />
-                                <span className="font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">Elevate?</span>
+                                <span className="font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">Begin?</span>
                             </h2>
                             
                             <p className="text-white/60 text-lg md:text-xl max-w-lg font-light leading-relaxed">
-                                Partner with Orbit to transform your vision into an unforgettable reality. Let's engineer something extraordinary together.
+                                Let’s co-create a universe that truly captivates your guests and honors your vision. Partner with Orbit Events to bring your extraordinary journey to life.
                             </p>
                         </div>
 
                         {/* Right Side: The Interface / Buttons */}
                         <div className="flex flex-col gap-6 w-full lg:max-w-md ml-auto">
                             
-                            {/* Primary Action */}
+                            {/* Primary Action - Humanized */}
                             <motion.button 
+                                aria-label="Start a conversation with our event specialists"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="relative w-full group/btn overflow-hidden rounded-xl border border-cosmic-blue/50 bg-cosmic-blue/5 backdrop-blur-md p-1 cursor-pointer"
@@ -69,7 +71,7 @@ export default function CtaSection() {
                                 <div className="absolute inset-0 bg-cosmic-blue translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-in-out" />
                                 <div className="relative flex items-center justify-between px-8 py-6">
                                     <span className="font-display font-bold text-white tracking-widest uppercase text-sm md:text-base group-hover/btn:text-deep-space transition-colors duration-500">
-                                        Inquire Now
+                                        Start A Conversation
                                     </span>
                                     {/* Action Icon */}
                                     <svg className="w-6 h-6 text-cosmic-blue group-hover/btn:text-deep-space transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,19 +79,20 @@ export default function CtaSection() {
                                     </svg>
                                 </div>
                             </motion.button>
-
-                            {/* Secondary Action */}
+ 
+                            {/* Secondary Action - Humanized */}
                             <motion.button 
+                                aria-label="View our portfolio of luxury events"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="w-full flex items-center justify-between px-9 py-6 rounded-xl border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-300 group/comm cursor-pointer"
                             >
                                 <span className="font-display font-bold text-white/70 group-hover/comm:text-white tracking-widest uppercase text-sm md:text-base">
-                                    Explore Portfolio
+                                    View Our Work
                                 </span>
                                 <div className="w-3 h-3 rounded-full border border-white/50 group-hover/comm:bg-white transition-colors duration-300" />
                             </motion.button>
-
+ 
                             {/* Decorative coordinate layout beneath buttons */}
                             <div className="flex justify-between w-full px-2 text-[10px] text-white/30 font-mono tracking-[0.2em] mt-4 border-t border-white/5 pt-4">
                                 <span>COORD: 25.2048° N</span>

@@ -19,8 +19,8 @@ function MovingStars() {
             <Stars 
                 radius={100} 
                 depth={60} 
-                count={6000} 
-                factor={4} 
+                count={8000} 
+                factor={6} 
                 saturation={0} 
                 fade 
                 speed={1.5} /* Keep Drei's internal twinkle speed too */

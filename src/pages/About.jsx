@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, Telescope, Shield, Users, Activity, Globe, Zap, Database } from 'lucide-react';
 import StarBackground from '../components/home/StarBackground';
 import WhyChooseMissionControl from '../components/home/WhyChooseMissionControl';
+import WhyChooseScannerSection from '../components/home/WhyChooseScannerSection';
 import CtaSection from '../components/home/CtaSection';
 const values = [
     { 
@@ -57,7 +58,17 @@ export default function About() {
             {/* Hero Section */}
             <section className="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden border-b border-white/5">
                 <div className="absolute inset-0 z-0">
-                    <StarBackground />
+                    <motion.img 
+                        initial={{ scale: 1.1, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 2.5, ease: "easeOut" }}
+                        src="/space/space.png" 
+                        alt="Deep Space Background" 
+                        className="w-full h-full object-cover select-none pointer-events-none"
+                    />
+                    {/* Cinematic Overlays (Softened for clarity) */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-deep-space/50 via-transparent to-deep-space/80 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-deep-space/30 via-transparent to-deep-space/30 z-10" />
                 </div>
                 
                 {/* Holographic Radar/Grid Elements */}
@@ -112,7 +123,7 @@ export default function About() {
                 REDESIGNED ORIGIN MODULE
                 ====================================
                 */}
-                <section className="relative mb-24 pt-8 md:pt-12">
+                <section className="relative mb-8 pt-8 md:pt-12">
                     {/* Background decorative typography */}
                     <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[15vw] font-display font-black text-white/[0.02] tracking-tighter leading-none select-none pointer-events-none z-0 whitespace-nowrap">
                         THE ORIGIN
@@ -142,9 +153,9 @@ export default function About() {
                                     <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:2rem_2rem] z-20 pointer-events-none opacity-50 mix-blend-overlay" />
                                     
                                     <img 
-                                        src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
-                                        className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[2s] grayscale-[40%] group-hover:grayscale-0 relative z-10 opacity-90" 
-                                        alt="Astronaut floating"
+                                        src="/space/astronaut.png" 
+                                        className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[2s] grayscale-[40%] group-hover:grayscale-0 relative z-10 opacity-90" 
+                                        alt="Orbit Astronaut"
                                     />
                                     {/* Cinematic Gradient Fade */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent z-20 pointer-events-none" />
@@ -158,87 +169,75 @@ export default function About() {
                                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                             >
                                 <div className="absolute inset-2 rounded-full border border-dashed border-cosmic-blue/40 animate-[spin_10s_linear_infinite]" />
-                                <span className="text-4xl md:text-5xl font-display font-black text-white leading-none drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">10</span>
-                                <span className="text-[8px] md:text-[10px] tracking-[0.2em] text-cosmic-blue uppercase mt-1 text-center font-mono">Years<br/>Orbit</span>
+                                <span className="text-4xl md:text-5xl font-display font-black text-white leading-none drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">25</span>
+                                <span className="text-[8px] md:text-[10px] tracking-[0.2em] text-cosmic-blue uppercase mt-1 text-center font-mono">Years Of<br/>Orbiting</span>
                             </motion.div>
 
                             {/* Removed purple activity icon */}
                         </div>
 
                         {/* Right: Architectural Content Structure */}
-                        <div className="lg:col-span-7 lg:pl-12 flex flex-col justify-center">
-                            
+                        <div className="lg:col-span-7 lg:pl-12">
                             <motion.div 
                                 initial={{ opacity: 0, x: 40 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.8 }}
-                                className="flex flex-col gap-8 md:gap-12"
+                                className="flex flex-col gap-10"
                             >
                                 {/* Header Block */}
-                                <div className="relative">
-                                    {/* Architectural Timeline Line (Desktop Only) */}
-                                    <div className="absolute -left-12 top-4 bottom-[-40px] w-[2px] bg-gradient-to-b from-cosmic-blue via-cosmic-blue/20 to-transparent hidden lg:block" />
-                                    <div className="absolute -left-[51px] top-4 w-3 h-3 rounded-full bg-cosmic-blue shadow-[0_0_15px_#4FD1FF] hidden lg:block border-[3px] border-[#060913]" />
-                                    
-                                    <div className="hidden">
-                                        {/* Removed protocol badge */}
-                                    </div>
-                                    
-                                    <h2 className="text-5xl md:text-6xl lg:text-[80px] font-display font-black text-white leading-[1.05] tracking-tighter mb-4">
-                                        Who We <br />
-                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-blue via-white to-cosmic-blue/40 italic font-light">Are?</span>
+                                <div className="relative mb-4">
+                                    <h2 className="text-5xl md:text-6xl lg:text-[70px] font-display font-black text-white leading-[1.05] tracking-tighter">
+                                        Who We <span className="text-cosmic-blue italic font-light">Are?</span>
                                     </h2>
                                 </div>
 
-                                {/* Narrative Panel (Glassmorphic Data Block) */}
-                                <div className="bg-[#0A0E17]/60 backdrop-blur-2xl p-8 md:p-12 rounded-[2.5rem] border border-white/10 relative group overflow-hidden shadow-2xl">
-                                    {/* Tech Scanline overlay */}
-                                    <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.3)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
-                                    
-                                    <div className="absolute top-0 right-0 w-64 h-64 bg-cosmic-blue/10 blur-[80px] group-hover:bg-cosmic-blue/20 transition-colors duration-700 rounded-full pointer-events-none" />
-                                    
-                                    {/* Decorative Corner Brackets */}
-                                    <div className="absolute top-8 left-8 w-6 h-6 border-t-2 border-l-2 border-cosmic-blue/40 transition-all duration-500 group-hover:scale-110 group-hover:border-cosmic-blue" />
-                                    <div className="absolute bottom-8 right-8 w-6 h-6 border-b-2 border-r-2 border-cosmic-blue/40 transition-all duration-500 group-hover:scale-110 group-hover:border-cosmic-blue" />
-
-                                    <div className="relative z-10 px-4 py-2">
-                                        <p className="text-xl md:text-3xl text-white font-light leading-relaxed mb-6 font-display tracking-tight">
-                                            Founded on the principle that events should be more than just gatherings, Orbit Events was built to engineer immersive brand dimensions.
-                                        </p>
-                                        <p className="text-starlight/60 font-light leading-relaxed font-sans text-sm md:text-base">
-                                            Like a dedicated space agency, we meticulously plan, design, and execute missions that captivate audiences, defy conventional expectations, and create inescapable gravitational pull for your brand. Our coordinates are forever set to the future. <br/><br/><strong className="text-white font-medium text-lg uppercase tracking-widest font-mono">We don't just host—we launch.</strong>
-                                        </p>
+                                {/* Subsection 1: What We Do */}
+                                <div className="relative pl-8 border-l border-white/10 group">
+                                    <div className="absolute top-0 left-[-2px] w-[3px] h-0 bg-cosmic-blue transition-all duration-700 group-hover:h-full" />
+                                    <div className="mb-4">
+                                        <span className="font-mono text-[10px] text-cosmic-blue tracking-[0.4em] uppercase opacity-60">Module-01</span>
+                                        <h3 className="text-2xl md:text-3xl font-display font-bold text-white mt-1">What We Do</h3>
                                     </div>
+                                    <p className="text-starlight/70 leading-relaxed font-light mb-4">
+                                        From product launches to award ceremonies, concerts, entertainment events, festivals, sponsorship activations, road shows, campaigns, conferences, or corporate events of any scale – you name it, we’ve got you covered.
+                                    </p>
+                                    <p className="text-starlight/70 leading-relaxed font-light mb-4">
+                                        We develop bespoke strategies to suit each client’s needs. We take great pride in being at the forefront of innovation and creativity.
+                                    </p>
+                                    <p className="text-cosmic-blue font-medium italic">
+                                        We’re here to help you explore a flawlessly crafted universe that brings your vision to life.
+                                    </p>
                                 </div>
 
-                                {/* Metrics Grid */}
-                                <div className="grid grid-cols-2 gap-4 md:gap-6">
-                                    
-                                    {/* Metric 1 */}
-                                    <div className="bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-xl p-6 md:p-8 rounded-[2rem] border border-white/5 flex flex-col justify-center items-start group hover:border-white/20 transition-all duration-500 overflow-hidden relative shadow-xl">
-                                        <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-700 pointer-events-none">
-                                            <Zap size={140} />
-                                        </div>
-                                        <div className="hidden">
-                                            {/* Removed yellow zap icon */}
-                                        </div>
-                                        <span className="text-5xl md:text-6xl font-display font-black text-white mb-2 tracking-tighter">150+</span>
-                                        <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40 group-hover:text-white/70 transition-colors leading-relaxed">Successful Events<br/>Delivered</span>
+                                {/* Subsection 2: Our Inspiration */}
+                                <div className="relative pl-8 border-l border-white/10 group">
+                                    <div className="absolute top-0 left-[-2px] w-[3px] h-0 bg-nebula-purple transition-all duration-700 group-hover:h-full" />
+                                    <div className="mb-4">
+                                        <span className="font-mono text-[10px] text-nebula-purple tracking-[0.4em] uppercase opacity-60">Module-02</span>
+                                        <h3 className="text-2xl md:text-3xl font-display font-bold text-white mt-1">Our Inspiration</h3>
                                     </div>
+                                    <p className="text-starlight/70 leading-relaxed font-light mb-4">
+                                        Constellations, galaxies, planets, asteroids, stars, black holes, satellites, aliens, rockets, astronauts, moons, and anything space excites us. Our ethos is built around being curious, disrupting the norm, and going beyond to conquer new frontiers with our clients.
+                                    </p>
+                                    <p className="text-starlight/70 leading-relaxed font-light">
+                                        We are always excited to begin our incredible space odyssey that takes off the ground as we explore uncharted regions of the event universe bringing your ideas to life.
+                                    </p>
+                                </div>
 
-                                    {/* Metric 2 */}
-                                    <div className="bg-gradient-to-br from-white/[0.05] to-transparent backdrop-blur-xl p-6 md:p-8 rounded-[2rem] border border-white/5 flex flex-col justify-center items-start group hover:border-white/20 transition-all duration-500 overflow-hidden relative shadow-xl">
-                                        <div className="absolute -right-6 -bottom-6 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-700 pointer-events-none">
-                                            <Globe size={140} />
-                                        </div>
-                                        <div className="hidden">
-                                            {/* Removed blue globe icon */}
-                                        </div>
-                                        <span className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-white mb-2 tracking-tighter leading-none">Global <br/><span className="text-cosmic-blue italic font-light">Presence</span></span>
-                                        <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-white/40 group-hover:text-white/70 transition-colors leading-relaxed">Executing Events<br/>Worldwide</span>
+                                {/* Subsection 3: Point of Difference */}
+                                <div className="relative pl-8 border-l border-white/10 group">
+                                    <div className="absolute top-0 left-[-2px] w-[3px] h-0 bg-orbit-gold transition-all duration-700 group-hover:h-full" />
+                                    <div className="mb-4">
+                                        <span className="font-mono text-[10px] text-orbit-gold tracking-[0.4em] uppercase opacity-60">Module-03</span>
+                                        <h3 className="text-2xl md:text-3xl font-display font-bold text-white mt-1">Point Of Difference</h3>
                                     </div>
-
+                                    <p className="text-starlight/70 leading-relaxed font-light mb-4">
+                                        We love to be challenged and are passionate about creating powerful human experiences, that connect people and brands. What sets us apart are the years of experience and sound knowledge of different markets and segments in which we operate.
+                                    </p>
+                                    <p className="text-starlight/70 leading-relaxed font-light">
+                                        We strive to provide high-quality services and a trustworthy experience to all clients and partners alike. We work with the best suppliers and the most illustrious venues to create the distinguishable mark that sets us apart in every project we build.
+                                    </p>
                                 </div>
                             </motion.div>
                         </div>
@@ -250,7 +249,7 @@ export default function About() {
                 IMPROVISED VALUES SECTION
                 ====================================
                 */}
-                <section className="mb-12 relative overflow-hidden pt-12 pb-16 rounded-[4rem]">
+                <section className="mb-0 relative overflow-hidden pt-4 pb-8 rounded-[4rem]">
                     {/* Cinematic Moving Deep Space Background */}
                     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-transparent to-deep-space z-10" />
@@ -392,7 +391,7 @@ export default function About() {
                 </section>
             </div>
             
-            <WhyChooseMissionControl />
+            <WhyChooseScannerSection />
             
             <CtaSection />
             
