@@ -156,9 +156,7 @@ export default function WhyChooseScannerSection() {
             {/* Top Area */}
             <div className="text-center mb-16 relative z-20 px-6">
                 <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                 >
                     <h2 className="text-5xl md:text-7xl lg:text-8xl font-display font-black text-white mb-6 tracking-tight max-w-4xl mx-auto leading-[1.1]">
                         Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-cosmic-blue via-white to-cosmic-blue/50 italic font-light text-6xl md:text-8xl">Choose Us?</span>
@@ -240,9 +238,7 @@ export default function WhyChooseScannerSection() {
                         return (
                             <motion.div 
                                 key={card.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
                                 className={`relative p-8 md:p-10 rounded-3xl border transition-all duration-700 backdrop-blur-xl group
                                     ${isSelected ? 'border-cosmic-blue bg-[#060913]/90 shadow-[0_0_50px_rgba(79,209,255,0.4)] scale-105 z-30' : 'border-white/10 bg-[#060913]/50 hover:bg-[#060913]/70 hover:border-white/30'}`}

@@ -17,9 +17,7 @@ export default function CtaSection() {
                 {/* Main Holographic Console */}
                 <motion.div
                     id="contact-cta"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="relative w-full border border-white/10 bg-deep-space/40 backdrop-blur-2xl rounded-2xl p-10 md:p-16 overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.5)]"
                 >
@@ -39,8 +37,7 @@ export default function CtaSection() {
                         {/* Left Side: Humanized Header Text */}
                         <div className="space-y-8">
                             <motion.div 
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
+                                animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.2 }}
                                 className="flex items-center gap-4 text-xs md:text-sm font-mono text-cosmic-blue uppercase tracking-[0.3em]"
                             >
@@ -48,13 +45,13 @@ export default function CtaSection() {
                                 Connection Port: Open // Ready
                             </motion.div>
                             
-                            <h2 className="text-5xl md:text-7xl font-display font-light text-white leading-tight">
-                                Ready To <br />
-                                <span className="font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">Begin?</span>
+                            <h2 className="text-4xl md:text-6xl font-display font-light text-white leading-tight">
+                                Ready to Create <br />
+                                <span className="font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">Extraordinary Experiences?</span>
                             </h2>
                             
                             <p className="text-white/60 text-lg md:text-xl max-w-lg font-light leading-relaxed">
-                                Let’s co-create a universe that truly captivates your guests and honors your vision. Partner with Orbit Events to bring your extraordinary journey to life.
+                                Partner with Orbit Events for premium event management, immersive brand activations, corporate events, entertainment productions, and unforgettable experiences across Dubai and the UAE.
                             </p>
                         </div>
 

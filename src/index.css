@@ -41,6 +41,20 @@
   .neon-glow {
     box-shadow: 0 0 15px theme('colors.cosmic-blue'), inset 0 0 15px theme('colors.cosmic-blue');
   }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: theme('colors.orbit-gold');
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #ffd700;
+  }
 }
 
 /* Custom Scrollbar */

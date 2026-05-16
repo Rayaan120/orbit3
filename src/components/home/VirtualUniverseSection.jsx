@@ -1,9 +1,10 @@
 import React, { useRef, useState, Suspense, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars, Html, useTexture, Float } from '@react-three/drei';
+import { Stars, Html, useTexture, Float, Billboard } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
-import { Briefcase, Zap, Layout, Rocket, Users, X, ArrowRight, Loader } from 'lucide-react';
+import { Briefcase, Zap, Layout, Rocket, Users, X, ArrowRight, Loader, Globe } from 'lucide-react';
+
 
 // ============================================================
 // PLANET DATA — Edit service info & orbital params here
@@ -13,9 +14,10 @@ const PLANETS = [
         id: "corporate",
         name: "Earth",
         service: "Corporate Events",
-        shortDesc: "Summits & Executive Conferences",
-        fullDesc: "We engineer corporate events that break the mold of traditional conferences. From global assemblies to intimate executive retreats, we construct environments that foster deep connection, inspire decisive innovation, and amplify your corporate message with surgical precision.",
+        shortDesc: "Executing your vision with a meticulous eye for detail.",
+        fullDesc: "For our corporate events, we know how important it is to not only have a technically flawless event but one that will wow your audience. Our team is specialized to create stress-free, sensational events through imaginative, immersive approaches that are great for your attendees’ experience and for building your community.\n\nMEETINGS | REWARDS & RECOGNITION | CONFERENCES | SUMMITS | NETWORKING EVENTS | GALAS | EMPLOYEE ENGAGEMENT | LEADERSHIP EVENTS | TALK SHOWS | FACILITY INAUGURATION | WORK ANNIVERSARY | OFFSITES | EMPLOYEE DAY | FITNESS PROGRAMS | INCENTIVE TRAVEL",
         icon: Briefcase,
+        planetImg: "/planets/earth.png",
         textureUrl: "/textures/planets/earth.jpg",
         normalUrl: "/textures/planets/earth_normal.jpg",
         specularUrl: "/textures/planets/earth_specular.jpg",
@@ -25,7 +27,7 @@ const PLANETS = [
         marsColor: false,
         accentColor: "#4FD1FF",
         radius: 4,
-        size: 0.75,
+        size: 1.1,
         orbitSpeed: 0.18,
         selfRotation: 0.4,
         tilt: 0,
@@ -33,11 +35,12 @@ const PLANETS = [
     {
         id: "brand",
         name: "Mars",
-        service: "Brand Experiences",
-        shortDesc: "Immersive Architectural Brand Spaces",
-        fullDesc: "Our brand experiences transcend standard executions. We utilize dynamic spatial flow, cutting-edge interactive technology, and bold architectural elements to ensure your presence establishes dominance and creates lasting emotional memory.",
+        service: "Brand Experience",
+        shortDesc: "Inspiring wonder, establishing connections, and making a transformative impact.",
+        fullDesc: "Getting your brand into the consumer's hand has been proven to increase follow-up purchases. We work with our clients to activate their brands through innovative product demos and attention-grabbing sampling campaigns. We vet and match each brand activation with the right people by telling your story. We help build brands that inspire wonder, establish connections and make a transformative impact.\n\nMARKETING CAMPAIGNS | EXPERIENTIAL | ROADSHOWS | COLLATERALS",
         icon: Layout,
-        textureUrl: "/textures/planets/mars.jpg",  // moon-like cratered surface, tinted red via emissive
+        planetImg: "/planets/mars.png",
+        textureUrl: "/textures/planets/mars.jpg",
         normalUrl: null,
         specularUrl: null,
         cloudsUrl: null,
@@ -46,7 +49,7 @@ const PLANETS = [
         marsColor: true, // apply reddish tint via material color
         accentColor: "#E57A44",
         radius: 6,
-        size: 0.5,
+        size: 0.8,
         orbitSpeed: 0.12,
         selfRotation: 0.5,
         tilt: 0,
@@ -54,10 +57,11 @@ const PLANETS = [
     {
         id: "sponsorship",
         name: "Jupiter",
-        service: "Sponsorship Activations",
-        shortDesc: "Electrifying Consumer Touchpoints",
-        fullDesc: "We create electrifying activations possessing massive gravitational pull. By synchronizing the physical and digital realms, we deploy highly visual consumer touchpoints designed specifically to trigger virality, engagement, and profound brand loyalty.",
+        service: "Sponsorship Activation",
+        shortDesc: "Making valuable connections that truly align with your audience.",
+        fullDesc: "We take sponsorships and “activate” them by making valuable connections through the right kinds of marketing activities that truly align with your desired audience. We aren’t about generating impressions but about creating moments that inspire action and deliver on your brand promise. Our expertise spans the entire spectrum of sponsorship from scoping, evaluating, negotiations, management, optimizing, and activating.",
         icon: Zap,
+        planetImg: "/planets/jupiter.png",
         textureUrl: "/textures/planets/jupiter.jpg",
         normalUrl: null,
         specularUrl: null,
@@ -67,7 +71,7 @@ const PLANETS = [
         marsColor: false,
         accentColor: "#D4A96A",
         radius: 9,
-        size: 1.3,
+        size: 1.8,
         orbitSpeed: 0.07,
         selfRotation: 0.9,
         tilt: 0,
@@ -76,9 +80,10 @@ const PLANETS = [
         id: "entertainment",
         name: "Saturn",
         service: "Entertainment",
-        shortDesc: "Cinematic Showcases & Live Production",
-        fullDesc: "A cinematic theatrical event. We orchestrate every variable—venue atmospheric controls, light sequencing, and narrative arc—ensuring your entertainment productions achieve immediate atmospheric entry and capture the world's imagination.",
+        shortDesc: "Curating high-profile and quality entertainment across the Middle East.",
+        fullDesc: "We take pride in curating high-profile and quality entertainment events across the Middle East. Our team provides consultancy for all your event entertainment needs including sourcing the artists and performers to managing the technical requirements and logistics. We are also passionate about conceptualizing IPs, Festivals, and experiences that are bound to delight you and your audience.",
         icon: Rocket,
+        planetImg: "/planets/saturn.png",
         textureUrl: "/textures/planets/saturn.jpg",
         normalUrl: null,
         specularUrl: null,
@@ -89,7 +94,7 @@ const PLANETS = [
         ringTextureUrl: "/textures/planets/saturn_ring.png",
         accentColor: "#C9A84C",
         radius: 12.5,
-        size: 1.1,
+        size: 1.6,
         orbitSpeed: 0.05,
         selfRotation: 0.7,
         tilt: 0,
@@ -97,10 +102,11 @@ const PLANETS = [
     {
         id: "marketing",
         name: "Venus",
-        service: "Marketing Campaigns",
-        shortDesc: "Multi-Sensory Brand Journeys",
-        fullDesc: "We engineer multi-sensory campaigns that invite audiences to step fully into your brand's operational universe. These campaigns move decisively past passive marketing to construct deep, personalized emotional anchors utilizing gamification and advanced brand strategy.",
+        service: "Marketing & Promotions",
+        shortDesc: "Engaging directly with customers to make your brand the preferred choice.",
+        fullDesc: "We help customize plans to demonstrate the key selling points of your product/service through experiential experiences that engage directly with your customer and make your brand the preferred choice.",
         icon: Users,
+        planetImg: "/planets/venus.png",
         textureUrl: "/textures/planets/venus.jpg",
         normalUrl: null,
         specularUrl: null,
@@ -110,19 +116,20 @@ const PLANETS = [
         marsColor: false,
         accentColor: "#E8B866",
         radius: 16.5,
-        size: 0.65,
+        size: 1.0,
         orbitSpeed: 0.035,
         selfRotation: 0.12,
         tilt: 0,
     }
 ];
 
+
 // ============================================================
 // CAMERA CONTROLLER
 // ============================================================
 function CameraController({ targetPosition, isZoomed }) {
     const { camera } = useThree();
-    const defaultPos = new THREE.Vector3(0, 12, 32);
+    const defaultPos = new THREE.Vector3(0, 15, 35);
 
     useFrame((state, delta) => {
         if (isZoomed && targetPosition) {
@@ -179,6 +186,8 @@ function Sun() {
     );
 }
 
+
+
 // ============================================================
 // SATURN RINGS
 // ============================================================
@@ -199,15 +208,22 @@ function CloudLayer({ size, shouldDim, selfRotation }) {
     const cloudTex = useTexture("/textures/planets/earth_clouds.png");
     const cloudsRef = useRef();
     useFrame((_, delta) => {
-        if (cloudsRef.current) cloudsRef.current.rotation.y += (selfRotation + 0.1) * delta;
+        if (cloudsRef.current) cloudsRef.current.rotation.y += (selfRotation + 0.08) * delta;
     });
     return (
-        <mesh ref={cloudsRef} scale={1.02}>
+        <mesh ref={cloudsRef} scale={1.015}>
             <sphereGeometry args={[size, 64, 64]} />
-            <meshPhongMaterial map={cloudTex} transparent opacity={shouldDim ? 0.02 : 0.4} depthWrite={false} />
+            <meshStandardMaterial 
+                map={cloudTex} 
+                transparent 
+                opacity={shouldDim ? 0.02 : 0.35} 
+                depthWrite={false} 
+                blending={THREE.AdditiveBlending}
+            />
         </mesh>
     );
 }
+
 
 // ============================================================
 // PLANET COMPONENT
@@ -217,11 +233,8 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
     const meshRef = useRef();
     const [hovered, setHover] = useState(false);
 
-    const textures = useTexture({
-        map: data.textureUrl,
-        ...(data.normalUrl ? { normalMap: data.normalUrl } : {}),
-        ...(data.specularUrl ? { specularMap: data.specularUrl } : {}),
-    });
+    // We'll use useTexture directly in the Billboard to ensure the correct image is mapped
+
 
     // Build orbital path
     const orbitPoints = React.useMemo(() => {
@@ -241,8 +254,9 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
 
     useFrame((state, delta) => {
         if (orbitRef.current) orbitRef.current.rotation.y += data.orbitSpeed * delta;
-        if (meshRef.current) meshRef.current.rotation.y += data.selfRotation * delta;
+        // No need for mesh rotation if it's a billboard facing camera
     });
+
 
     const isSelected = selectedId === data.id;
     const shouldDim = isZoomed && !isSelected;
@@ -257,64 +271,59 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
             {/* Orbiting group */}
             <group ref={orbitRef}>
                 <group position={[data.radius, 0, 0]}>
-                    {/* Planet */}
-                    <mesh
-                        ref={meshRef}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            if (!isZoomed) {
-                                const worldPos = new THREE.Vector3();
-                                meshRef.current.getWorldPosition(worldPos);
-                                onSelect(data.id, worldPos);
-                            }
-                        }}
-                        onPointerOver={(e) => {
-                            e.stopPropagation();
-                            setHover(true);
-                            document.body.style.cursor = 'pointer';
-                        }}
-                        onPointerOut={(e) => {
-                            e.stopPropagation();
-                            setHover(false);
-                            document.body.style.cursor = 'auto';
-                        }}
-                        scale={hovered && !isZoomed ? 1.12 : 1}
+                    {/* Planet Sprite (Realistic Image) */}
+                    <Billboard
+                        follow={true}
+                        lockX={false}
+                        lockY={false}
+                        lockZ={false}
                     >
-                        <sphereGeometry args={[data.size, 64, 64]} />
-                        <meshPhongMaterial
-                            map={textures.map}
-                            color={data.marsColor ? new THREE.Color(0xBB5533) : new THREE.Color(0xffffff)}
-                            normalMap={textures.normalMap || null}
-                            specularMap={textures.specularMap || null}
-                            specular={data.specularUrl ? new THREE.Color(0x444444) : new THREE.Color(0x000000)}
-                            shininess={data.specularUrl ? 30 : 5}
-                            transparent={shouldDim}
-                            opacity={shouldDim ? 0.15 : 1}
-                        />
-
-                        {/* Atmosphere glow */}
-                        <mesh scale={1.08}>
-                            <sphereGeometry args={[data.size, 32, 32]} />
+                        <mesh
+                            ref={meshRef}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (!isZoomed) {
+                                    const worldPos = new THREE.Vector3();
+                                    meshRef.current.getWorldPosition(worldPos);
+                                    onSelect(data.id, worldPos);
+                                }
+                            }}
+                            onPointerOver={(e) => {
+                                e.stopPropagation();
+                                setHover(true);
+                                document.body.style.cursor = 'pointer';
+                            }}
+                            onPointerOut={(e) => {
+                                e.stopPropagation();
+                                setHover(false);
+                                document.body.style.cursor = 'auto';
+                            }}
+                            scale={hovered && !isZoomed ? 1.15 : 1}
+                        >
+                            <planeGeometry args={[data.size * 2.2, data.size * 2.2]} />
                             <meshBasicMaterial
-                                color={data.accentColor}
-                                transparent
-                                opacity={hovered && !isZoomed ? 0.25 : 0.07}
-                                blending={THREE.AdditiveBlending}
+                                map={useTexture(data.planetImg)}
+                                transparent={true}
+                                opacity={shouldDim ? 0.2 : 1}
                                 depthWrite={false}
                             />
                         </mesh>
+                    </Billboard>
 
-                        {/* HTML Tooltip */}
-                        {!isZoomed && hovered && (
-                            <Html distanceFactor={20} center position={[0, data.size + 1.8, 0]}>
-                                <div className="pointer-events-none bg-black/70 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-center min-w-[140px] shadow-2xl"
-                                    style={{ borderColor: `${data.accentColor}40` }}>
-                                    <p className="text-[9px] font-mono tracking-[0.2em] uppercase mb-1" style={{ color: data.accentColor }}>{data.name}</p>
-                                    <p className="text-white font-display font-bold text-sm whitespace-nowrap">{data.service}</p>
-                                </div>
-                            </Html>
-                        )}
-                    </mesh>
+                    {/* HTML Tooltip */}
+                    {!isZoomed && hovered && (
+                        <Html distanceFactor={20} center position={[0, data.size + 1.2, 0]}>
+                            <div className="pointer-events-none bg-black/80 backdrop-blur-xl border border-white/20 rounded-2xl px-5 py-4 text-center min-w-[160px] shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+                                style={{ borderColor: `${data.accentColor}40`, boxShadow: `0 0 20px ${data.accentColor}20` }}>
+                                <p className="text-[10px] font-mono tracking-[0.3em] uppercase mb-1.5" style={{ color: data.accentColor }}>{data.name} System</p>
+                                <p className="text-white font-display font-bold text-base whitespace-nowrap leading-none">{data.service}</p>
+
+                                <div className="mt-2 w-full h-[1px] bg-white/10" />
+                                <p className="text-white/40 text-[9px] mt-2 font-mono uppercase tracking-widest">Click to deploy</p>
+                            </div>
+                        </Html>
+                    )}
+
 
                     {/* Earth Cloud Layer — only for Earth */}
                     {data.hasClouds && (
@@ -323,12 +332,8 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
                         </Suspense>
                     )}
 
-                    {/* Saturn Rings */}
-                    {data.hasRings && !shouldDim && (
-                        <Suspense fallback={null}>
-                            <SaturnRings ringTextureUrl={data.ringTextureUrl} />
-                        </Suspense>
-                    )}
+                    {/* Saturn Rings - Removed to use the rings built into the realistic image */}
+
                 </group>
             </group>
         </group>
@@ -423,11 +428,18 @@ export default function VirtualUniverseSection() {
                         className="absolute top-1/2 -translate-y-1/2 right-6 z-10 hidden lg:flex flex-col gap-3"
                     >
                         {PLANETS.map((p) => (
-                            <div key={p.id} className="flex items-center gap-3 group cursor-pointer" onClick={() => {}}>
-                                <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.accentColor, boxShadow: `0 0 8px ${p.accentColor}` }} />
-                                <span className="font-mono text-[9px] tracking-widest uppercase text-white/30 group-hover:text-white/70 transition-colors">{p.name}</span>
+                            <div key={p.id} className="flex items-center gap-4 group cursor-pointer" onClick={() => handleSelectPlanet(p.id, null)}>
+                                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/10 group-hover:border-white/30 transition-all duration-300">
+                                    <img src={p.planetImg} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="font-mono text-[9px] tracking-widest uppercase text-white/30 group-hover:text-white/70 transition-colors">{p.name}</span>
+                                    <span className="font-display text-[10px] text-white/60 group-hover:text-white transition-colors">{p.service}</span>
+                                </div>
                             </div>
                         ))}
+
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -440,7 +452,7 @@ export default function VirtualUniverseSection() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 80 }}
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        className="absolute inset-y-0 right-0 w-full md:w-[460px] bg-black/70 backdrop-blur-3xl border-l border-white/10 z-30 flex flex-col overflow-y-auto"
+                        className="absolute inset-y-0 right-0 w-full md:w-[460px] bg-black/85 backdrop-blur-3xl border-l border-white/10 z-30 flex flex-col overflow-y-auto custom-scrollbar"
                         style={{ borderColor: `${selectedService.accentColor}20` }}
                     >
                         {/* Close */}
@@ -451,26 +463,32 @@ export default function VirtualUniverseSection() {
                             <X size={18} />
                         </button>
 
-                        <div className="flex flex-col h-full p-10 md:p-12 justify-center">
+                        <div className="flex flex-col h-full p-10 md:p-12 md:pt-24 pt-20 justify-start">
                             {/* Planet indicator */}
                             <div className="flex items-center gap-3 mb-10">
                                 <div className="w-3 h-3 rounded-full animate-pulse" style={{ backgroundColor: selectedService.accentColor, boxShadow: `0 0 15px ${selectedService.accentColor}` }} />
                                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/30">{selectedService.name} — Orbit Locked</span>
                             </div>
 
-                            {/* Icon & Service Label */}
-                            <div className="flex items-center gap-5 mb-8">
-                                <div className="p-5 rounded-2xl bg-white/5 border" style={{ borderColor: `${selectedService.accentColor}50` }}>
-                                    <selectedService.icon size={32} color={selectedService.accentColor} />
-                                </div>
-                                <div>
-                                    <span className="font-mono text-[9px] text-white/20 tracking-widest uppercase block mb-1">Module // {selectedService.id}</span>
-                                    <span className="font-mono text-xs font-bold uppercase tracking-widest" style={{ color: selectedService.accentColor }}>System Active</span>
-                                </div>
-                            </div>
+                             {/* Planet Image & Service Label */}
+                             <div className="flex items-center gap-6 mb-8">
+                                 <div className="relative w-24 h-24 rounded-3xl overflow-hidden border-2 p-1" style={{ borderColor: `${selectedService.accentColor}30` }}>
+                                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent z-10 pointer-events-none" />
+                                     <img 
+                                        src={selectedService.planetImg} 
+                                        alt={selectedService.name} 
+                                        className="w-full h-full object-cover rounded-2xl"
+                                     />
+                                 </div>
+                                 <div>
+                                     <span className="font-mono text-[10px] text-white/20 tracking-widest uppercase block mb-1">Module // {selectedService.id}</span>
+                                     <span className="font-mono text-xs font-bold uppercase tracking-widest" style={{ color: selectedService.accentColor }}>System Active</span>
+                                 </div>
+                             </div>
+
 
                             {/* Title */}
-                            <h2 className="text-4xl md:text-5xl font-display font-black text-white tracking-tighter leading-tight mb-3">
+                            <h2 className="text-4xl md:text-6xl font-display font-black text-white tracking-tighter leading-[0.95] mb-4 pt-2">
                                 {selectedService.service}
                             </h2>
                             <p className="text-lg font-display font-light italic mb-8" style={{ color: selectedService.accentColor }}>
@@ -525,7 +543,7 @@ export default function VirtualUniverseSection() {
 
             {/* 3D Canvas */}
             <Canvas
-                camera={{ position: [0, 12, 32], fov: 60 }}
+                camera={{ position: [0, 15, 35], fov: 52 }}
                 gl={{ antialias: true, alpha: false }}
                 onCreated={() => setTimeout(() => setIsLoaded(true), 1200)}
             >

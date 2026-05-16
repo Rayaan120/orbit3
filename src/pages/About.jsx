@@ -138,9 +138,7 @@ export default function About() {
                             
                             {/* Capsule Container */}
                             <motion.div 
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
+                                animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 1 }}
                                 className="relative aspect-[4/5] rounded-[150px] p-2 border border-white/10 bg-[#060913]/80 backdrop-blur-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]"
                             >
@@ -179,9 +177,7 @@ export default function About() {
                         {/* Right: Architectural Content Structure */}
                         <div className="lg:col-span-7 lg:pl-12">
                             <motion.div 
-                                initial={{ opacity: 0, x: 40 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
+                                animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8 }}
                                 className="flex flex-col gap-10"
                             >
@@ -291,17 +287,13 @@ export default function About() {
                         </div>
                         
                         <motion.h2 
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            animate={{ opacity: 1, y: 0 }}
                             className="text-5xl md:text-8xl font-display font-black text-white mb-6 tracking-tighter"
                         >
                             Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/50 to-white/20 italic">Values</span>
                         </motion.h2>
                         <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
+                            animate={{ opacity: 1 }}
                             className="text-starlight/40 max-w-2xl mx-auto font-light tracking-widest uppercase text-[10px] md:text-xs leading-relaxed"
                         >
                             Built on precision, innovation, and control, our core values guide every Orbit Event—ensuring seamless execution, elevated experiences, and results that leave a lasting impact.
@@ -313,9 +305,7 @@ export default function About() {
                         {values.map((val, i) => (
                             <motion.div
                                 key={val.title}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: i * 0.15 }}
                                 className="group relative flex items-center justify-center h-[500px]"
                             >
