@@ -16,7 +16,7 @@ const services = [
 
 export default function ServicesOrbit() {
     return (
-        <section className="py-12 md:py-16 relative overflow-hidden bg-deep-space">
+        <section className="pt-8 pb-12 md:pt-10 md:pb-16 relative overflow-hidden bg-deep-space">
             <StarBackground />
             <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center mb-10">

@@ -66,7 +66,7 @@ export default function Footer() {
                     <div className="md:col-span-1">
                         <h3 className="text-lg font-display text-starlight mb-6 font-semibold uppercase tracking-wider">Services</h3>
                         <ul className="space-y-4">
-                            {['Corporate Events', 'Brand Experiences', 'Sponsorship Activations', 'Entertainment', 'Marketing Campaigns'].map(service => (
+                            {['Corporate Events', 'Brand Experiences', 'Sponsorship Activations', 'Entertainment', 'Marketing Campaigns', 'Exhibitions', 'Event Launches'].map(service => (
                                 <li key={service}>
                                     <Link to="/services" className="text-starlight/60 hover:text-cosmic-blue transition-colors text-sm flex items-center gap-2 group">
                                         <span className="w-1 h-1 rounded-full bg-cosmic-blue/0 group-hover:bg-cosmic-blue transition-colors" />

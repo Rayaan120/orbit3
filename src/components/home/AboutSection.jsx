@@ -10,7 +10,7 @@ export default function AboutSection() {
                 The layout is designed to strictly preserve the visual integrity of the asset
                 while preparing a clean left-aligned space for future content insertion.
             */}
-            <div className="relative w-full min-h-[60vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden">
+            <div className="relative w-full min-h-[30vh] md:min-h-[40vh] lg:min-h-[50vh] flex items-center overflow-hidden">
                 
                 {/* Cinematic Background Layer */}
                 <div className="absolute inset-0 z-0">
@@ -40,15 +40,15 @@ export default function AboutSection() {
                 </div>
 
                 {/* Content Architecture - Structured for future content insertion on the left side */}
-                <div className="relative z-20 max-w-[1400px] w-full mx-auto px-6 md:px-12 h-full flex items-center">
-                    <div className="w-full lg:w-1/2 flex flex-col justify-center items-start">
+                <div className="relative z-20 max-w-[1400px] w-full mx-auto px-6 md:px-12 h-full flex items-start">
+                    <div className="w-full lg:w-1/2 flex flex-col justify-start items-start">
                         {/* 
                             This content zone is left clean as per requirements. 
                             The layout maintains a "Rule of Thirds" balance where the visual weight 
                             is carried by the background image on the right, and the 
                             intellectual weight will be carried by the text on the left.
                         */}
-                        <div className="py-24 md:py-32 w-full max-w-xl">
+                        <div className="pt-12 pb-4 md:pt-16 md:pb-6 w-full max-w-xl">
                             <motion.h2 
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
@@ -97,22 +97,7 @@ export default function AboutSection() {
                     </div>
                 </div>
 
-                {/* Technical Aesthetic Details (Sci-Fi / Apple Inspired) */}
-                <div className="absolute bottom-10 left-10 md:left-12 z-30 hidden md:block">
-                    <div className="flex flex-col gap-2.5 font-mono text-[9px] md:text-[10px] text-white/10 tracking-[0.4em] uppercase">
-                        <div className="flex items-center gap-5">
-                            <span className="w-10 h-[0.5px] bg-white/10"></span>
-                            <span className="flex items-center gap-2">
-                                <span className="w-1 h-1 rounded-full bg-cosmic-blue animate-pulse"></span>
-                                Mission Control Visual System
-                            </span>
-                        </div>
-                        <div className="flex items-center gap-5">
-                            <span className="w-10 h-[0.5px] bg-white/10"></span>
-                            <span>Coordinates: Orbiting Primary</span>
-                        </div>
-                    </div>
-                </div>
+
                 
                 {/* Top Corner Technical Ornament */}
                 <div className="absolute top-12 left-12 z-30 hidden lg:block opacity-20 hover:opacity-50 transition-opacity duration-700">

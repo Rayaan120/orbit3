@@ -192,29 +192,29 @@ export default function WhyChooseScannerSection() {
                         />
                     </div>
 
-                    {/* Large Red Buzzer */}
+                    {/* Large Neon Green Buzzer */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40">
                         <button 
                             onClick={handleStopScan}
                             disabled={isScanning}
-                            className={`relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-b from-red-500 to-red-800 
-                                shadow-[0_10px_0_#7f1d1d,0_15px_40px_rgba(220,38,38,0.5)] 
-                                active:shadow-[0_2px_0_#7f1d1d,0_5px_15px_rgba(220,38,38,0.4)] 
+                            className={`relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-b from-lime-400 to-green-600 
+                                shadow-[0_10px_0_#14532d,0_15px_40px_rgba(34,197,94,0.5)] 
+                                active:shadow-[0_2px_0_#14532d,0_5px_15px_rgba(34,197,94,0.4)] 
                                 active:translate-y-2 transition-all duration-200 flex items-center justify-center group border-[6px] border-[#0a0e17]
-                                ${isScanning ? 'pointer-events-none scale-[0.98] shadow-[0_4px_0_#7f1d1d,0_10px_30px_rgba(220,38,38,0.6)] translate-y-1' : 'hover:brightness-110 hover:scale-105'}`}
+                                ${isScanning ? 'pointer-events-none scale-[0.98] shadow-[0_4px_0_#14532d,0_10px_30px_rgba(34,197,94,0.6)] translate-y-1' : 'hover:brightness-110 hover:scale-105'}`}
                         >
                             {/* Glossy top reflection */}
                             <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             
                             {/* Scanning Pulse */}
                             {isScanning && (
-                                <div className="absolute inset-0 rounded-full animate-ping bg-red-500/50" />
+                                <div className="absolute inset-0 rounded-full animate-ping bg-lime-400/50" />
                             )}
 
-                            <div className="flex flex-col items-center">
+                            <div className="flex flex-col items-center px-2 text-center">
                                 {isScanning ? (
-                                    <span className="font-display font-black text-white text-sm md:text-base tracking-[0.3em] uppercase drop-shadow-md animate-pulse">
-                                        Locking...
+                                    <span className="font-display font-black text-white text-xs md:text-sm tracking-[0.2em] uppercase drop-shadow-md animate-pulse">
+                                        Designing...
                                     </span>
                                 ) : selectedCard ? (
                                     <span className="font-display font-black text-white text-xs md:text-sm tracking-[0.2em] uppercase">
@@ -222,8 +222,8 @@ export default function WhyChooseScannerSection() {
                                     </span>
                                 ) : (
                                     <>
-                                        <span className="font-display font-black text-white/70 text-xs md:text-sm tracking-[0.2em] uppercase mb-1">Engage</span>
-                                        <span className="font-display font-black text-white text-xl md:text-3xl tracking-widest uppercase drop-shadow-lg leading-none">LOCK</span>
+                                        <span className="font-display font-black text-white/70 text-[10px] md:text-xs tracking-[0.1em] uppercase mb-1">Design Your</span>
+                                        <span className="font-display font-black text-white text-sm md:text-lg tracking-wider uppercase drop-shadow-lg leading-none">Experience</span>
                                     </>
                                 )}
                             </div>

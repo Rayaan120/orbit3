@@ -1,15 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const images = [
     {
-        url: "C:\\Users\\rayaa\\.gemini\\antigravity\\brain\\a782c452-32bf-4c42-97e5-a39640607d37\\luxury_cosmic_gala_1778445247739.png",
-        title: "Immersive Galas",
+        url: "/homeport/1.jpg",
+        title: "Orbit Events portfolio image 1",
         tag: "ARCHIVE // 01"
     },
     {
-        url: "C:\\Users\\rayaa\\.gemini\\antigravity\\brain\\a782c452-32bf-4c42-97e5-a39640607d37\\futuristic_activation_stage_1778445261593.png",
-        title: "Brand Dimensions",
+        url: "/homeport/2.JPG",
+        title: "Orbit Events portfolio image 2",
         tag: "ARCHIVE // 02"
     }
 ];
@@ -76,26 +77,6 @@ export default function GallerySection() {
                                     </span>
                                 </div>
 
-                                {/* Title Overlay */}
-                                <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between">
-                                    <div>
-                                        <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-2 tracking-tight group-hover:text-cosmic-blue transition-colors duration-500">
-                                            {img.title}
-                                        </h3>
-                                        <div className="flex gap-1.5 opacity-40">
-                                            {[...Array(5)].map((_, i) => (
-                                                <div key={i} className="w-3 h-[2px] bg-white transform -skew-x-12" />
-                                            ))}
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-cosmic-blue group-hover:bg-cosmic-blue/10 transition-all duration-500">
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white group-hover:text-cosmic-blue transition-colors">
-                                            <line x1="7" y1="17" x2="17" y2="7"></line>
-                                            <polyline points="7 7 17 7 17 17"></polyline>
-                                        </svg>
-                                    </div>
-                                </div>
                             </div>
                             
                             {/* Decorative technical line */}
@@ -103,6 +84,24 @@ export default function GallerySection() {
                         </motion.div>
                     ))}
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-14 flex justify-center"
+                >
+                    <Link
+                        to="/portfolio"
+                        className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/5 px-8 py-4 text-sm font-medium tracking-widest uppercase text-white transition-all duration-300 hover:border-cosmic-blue/60 hover:bg-cosmic-blue/10"
+                    >
+                        View Portfolio
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </Link>
+                </motion.div>
             </div>
             
             {/* Subtle light rays */}

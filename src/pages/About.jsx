@@ -117,62 +117,34 @@ export default function About() {
                 </div>
             </section>
 
-            <div className="max-w-[1400px] mx-auto px-6 relative z-20">
-                {/* 
-                ====================================
-                REDESIGNED ORIGIN MODULE
-                ====================================
-                */}
-                <section className="relative mb-8 pt-8 md:pt-12">
-                    {/* Background decorative typography */}
-                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[15vw] font-display font-black text-white/[0.02] tracking-tighter leading-none select-none pointer-events-none z-0 whitespace-nowrap">
-                        THE ORIGIN
-                    </div>
+            {/* 
+            ====================================
+            REDESIGNED ORIGIN MODULE (Who We Are)
+            ====================================
+            */}
+            <section className="relative mb-8 pt-8 md:pt-12 overflow-hidden min-h-[700px] w-full">
+                {/* Background decorative typography */}
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[15vw] font-display font-black text-white/[0.02] tracking-tighter leading-none select-none pointer-events-none z-0 whitespace-nowrap">
+                    THE ORIGIN
+                </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center relative z-10">
-                        
-                        {/* Left: The Astronaut Capsule Container */}
-                        <div className="lg:col-span-5 relative group w-full max-w-[400px] lg:max-w-none mx-auto">
-                            {/* Ambient Glow */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-cosmic-blue/30 to-nebula-purple/30 blur-[100px] opacity-40 group-hover:opacity-70 transition-opacity duration-1000 pointer-events-none" />
-                            
-                            {/* Capsule Container */}
-                            <motion.div 
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 1 }}
-                                className="relative aspect-[4/5] rounded-[150px] p-2 border border-white/10 bg-[#060913]/80 backdrop-blur-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-                            >
-                                {/* Revolving border rings */}
-                                <div className="absolute inset-0 border-2 border-dashed border-white/20 rounded-[150px] animate-[spin_30s_linear_infinite] opacity-30 pointer-events-none" />
-                                
-                                {/* Inner Image Mask */}
-                                <div className="relative w-full h-full rounded-[140px] overflow-hidden border border-white/20 z-10 bg-black">
-                                    {/* Tech Grid Overlay inside image */}
-                                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:2rem_2rem] z-20 pointer-events-none opacity-50 mix-blend-overlay" />
-                                    
-                                    <img 
-                                        src="/space/astronaut.png" 
-                                        className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-[2s] grayscale-[40%] group-hover:grayscale-0 relative z-10 opacity-90" 
-                                        alt="Orbit Astronaut"
-                                    />
-                                    {/* Cinematic Gradient Fade */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent z-20 pointer-events-none" />
-                                </div>
-                            </motion.div>
+                {/* Astronaut: full section background */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <img
+                        src="/space/astronaut.png"
+                        alt="Orbit Astronaut"
+                        className="w-full h-full object-cover object-left-bottom select-none opacity-55"
+                    />
+                    {/* Subtle dark overlay to keep text readable without hiding the astronaut */}
+                    <div className="absolute inset-0 bg-deep-space/30" />
+                    {/* Edge fades for smooth blending into surrounding sections */}
+                    <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-deep-space to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-deep-space to-transparent" />
+                </div>
 
-                            {/* Floating HUD Elements */}
-                            <motion.div
-                                className="absolute -right-4 md:-right-10 top-[20%] w-28 h-28 md:w-36 md:h-36 rounded-full bg-black/80 backdrop-blur-xl border border-cosmic-blue/50 flex flex-col items-center justify-center z-30 shadow-[0_0_30px_rgba(79,209,255,0.3)]"
-                                animate={{ y: [-15, 15, -15] }}
-                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                            >
-                                <div className="absolute inset-2 rounded-full border border-dashed border-cosmic-blue/40 animate-[spin_10s_linear_infinite]" />
-                                <span className="text-4xl md:text-5xl font-display font-black text-white leading-none drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">25</span>
-                                <span className="text-[8px] md:text-[10px] tracking-[0.2em] text-cosmic-blue uppercase mt-1 text-center font-mono">Years Of<br/>Orbiting</span>
-                            </motion.div>
-
-                            {/* Removed purple activity icon */}
-                        </div>
+                <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
+                        <div className="lg:col-span-5" />
 
                         {/* Right: Architectural Content Structure */}
                         <div className="lg:col-span-7 lg:pl-12">
@@ -238,8 +210,10 @@ export default function About() {
                             </motion.div>
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
+            <div className="max-w-[1400px] mx-auto px-6 relative z-20">
                 {/* 
                 ====================================
                 IMPROVISED VALUES SECTION
