@@ -181,7 +181,7 @@ const PLANETS = [
         hasRings: false,
         marsColor: false,
         accentColor: "#D6B17A",
-        radius: 28.5,
+        radius: 24.5,
         size: 0.75,
         orbitSpeed: 0.022,
         selfRotation: 0.35,
