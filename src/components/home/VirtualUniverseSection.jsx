@@ -3,7 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars, Html, useTexture, Float, Billboard } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
-import { Briefcase, Zap, Layout, Rocket, Users, X, ArrowRight, Loader, Globe } from 'lucide-react';
+import { Briefcase, Zap, Layout, Rocket, Users, X, ArrowRight, Loader, Globe, Trophy } from 'lucide-react';
 
 
 // ============================================================
@@ -102,9 +102,9 @@ const PLANETS = [
     {
         id: "marketing",
         name: "Venus",
-        service: "Marketing & Promotions",
-        shortDesc: "Engaging directly with customers to make your brand the preferred choice.",
-        fullDesc: "We help customize plans to demonstrate the key selling points of your product/service through experiential experiences that engage directly with your customer and make your brand the preferred choice.",
+        service: "Conferences & Summit",
+        shortDesc: "Creating focused platforms for leaders, teams, and audiences to connect.",
+        fullDesc: "We design and deliver conferences and summit experiences with seamless planning, speaker coordination, stage production, guest flow, and technical execution.\n\nCONFERENCES | SUMMITS | FORUMS | PANEL DISCUSSIONS | KEYNOTE SESSIONS | NETWORKING EVENTS | DELEGATE MANAGEMENT",
         icon: Users,
         planetImg: "/planets/venus.png",
         textureUrl: "/textures/planets/venus.jpg",
@@ -163,6 +163,28 @@ const PLANETS = [
         size: 1.1,
         orbitSpeed: 0.015,
         selfRotation: 0.25,
+        tilt: 0,
+    },
+    {
+        id: "awards-team-building",
+        name: "Mercury",
+        service: "Awards & Team Building",
+        shortDesc: "Celebrating achievement and bringing teams together through purposeful corporate experiences.",
+        fullDesc: "Orbit Events plans and produces awards ceremonies and team building events in Dubai and across the UAE for companies that want to recognize performance, strengthen culture, and create memorable employee experiences. From elegant awards nights and gala dinners to active team challenges, leadership retreats, and company offsites, we manage the concept, venue, production, entertainment, guest journey, and on-site coordination with precision.\n\nAWARD CEREMONIES | GALA DINNERS | EMPLOYEE RECOGNITION | CORPORATE TEAM BUILDING | LEADERSHIP RETREATS | COMPANY OFFSITES | STAFF ENGAGEMENT | THEMED ACTIVITIES | VENUE SOURCING | EVENT PRODUCTION",
+        icon: Trophy,
+        planetImg: "/planets/mercury.png",
+        textureUrl: null,
+        normalUrl: null,
+        specularUrl: null,
+        cloudsUrl: null,
+        hasClouds: false,
+        hasRings: false,
+        marsColor: false,
+        accentColor: "#D6B17A",
+        radius: 28.5,
+        size: 0.75,
+        orbitSpeed: 0.022,
+        selfRotation: 0.35,
         tilt: 0,
     }
 ];
@@ -485,7 +507,7 @@ export default function VirtualUniverseSection() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="absolute top-[32%] -translate-y-1/2 right-6 z-10 hidden lg:flex flex-col gap-3 xl:right-10 xl:gap-3.5"
+                        className="absolute top-[28%] -translate-y-1/2 right-6 z-10 hidden lg:flex flex-col gap-3 xl:right-10 xl:gap-3.5"
                     >
                         {PLANETS.map((p) => (
                             <div key={p.id} className="flex items-center gap-5 group cursor-pointer" onClick={() => handleSelectPlanet(p.id, null)}>
@@ -507,7 +529,7 @@ export default function VirtualUniverseSection() {
             {/* Planet Image Panel — LEFT SIDE */}
             <AnimatePresence>
                 {isZoomed && selectedService && (
-                    ['corporate', 'brand', 'sponsorship', 'entertainment', 'marketing', 'exhibitions', 'launch'].includes(selectedService.id) ? (
+                    ['corporate', 'brand', 'sponsorship', 'entertainment', 'marketing', 'exhibitions', 'launch', 'awards-team-building'].includes(selectedService.id) ? (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -528,6 +550,7 @@ export default function VirtualUniverseSection() {
                                         marketing: '/collage/marketing.jpeg',
                                         exhibitions: '/planets/exhibitionss.png',
                                         launch: '/planets/launchh.png',
+                                        'awards-team-building': '/collage/awards.jpeg',
                                     }[selectedService.id]}
                                     alt={selectedService.service}
                                     className="w-full h-full object-cover"

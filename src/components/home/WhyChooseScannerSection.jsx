@@ -341,7 +341,7 @@ function InteractiveFormModal({ onClose }) {
                             <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
                                 <p className="text-white text-lg mb-6 font-light">What are you looking for?</p>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {["Corporate Event", "Brand Activation", "Entertainment Experience", "Exhibition", "Luxury Experience", "Something Unique"].map(opt => (
+                                    {["Corporate Event", "Brand Activation", "Entertainment Experience", "Exhibition", "Luxury Experience", "Conference", "Launch Event", "Something Unique"].map(opt => (
                                         <button 
                                             key={opt}
                                             onClick={() => handleSelection('type', opt)} 

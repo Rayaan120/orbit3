@@ -10,8 +10,8 @@ const services = [
         icon: Sparkles
     },
     {
-        title: "Marketing & Promotions",
-        description: "Strategic campaigns and creative promotions that amplify brand visibility.",
+        title: "Conferences & Summit",
+        description: "Purpose-built conferences and summit experiences designed for connection and impact.",
         icon: Target
     },
     {

@@ -11,7 +11,7 @@ const services = [
     { title: "Sponsorships Activation", angle: 120 },
     { title: "Corporate Events", angle: 180 },
     { title: "Entertainment", angle: 240 },
-    { title: "Marketing & Promotions", angle: 300 },
+    { title: "Conferences & Summit", angle: 300 },
 ];
 
 export default function ServicesOrbit() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Instagram, Twitter, Linkedin, Facebook, Youtube } from 'lucide-react';
+import { Mail, Phone, MapPin, Instagram, X, Linkedin, Facebook, Youtube } from 'lucide-react';
 
 export default function Footer() {
     return (
@@ -28,7 +28,7 @@ export default function Footer() {
                                 <Instagram size={18} />
                             </a>
                             <a href="https://x.com/orbit_eventsuae" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 glass flex items-center justify-center text-starlight/80 hover:text-cosmic-blue hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all">
-                                <Twitter size={18} />
+                                <X size={18} />
                             </a>
                             <a href="https://www.facebook.com/OrbitEventsDubai/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 glass flex items-center justify-center text-starlight/80 hover:text-cosmic-blue hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all">
                                 <Facebook size={18} />
@@ -87,11 +87,11 @@ export default function Footer() {
                             </li>
                             <li className="flex items-center gap-3 text-starlight/60 text-sm">
                                 <Phone size={18} className="text-cosmic-blue shrink-0" />
-                                <span>+971 4 295 8339</span>
+                                <span>+971 55 576 3536</span>
                             </li>
                             <li className="flex items-center gap-3 text-starlight/60 text-sm">
                                 <Mail size={18} className="text-cosmic-blue shrink-0" />
-                                <span>info@orbiteventsuae.com</span>
+                                <span>info@orbit.events</span>
                             </li>
                         </ul>
                     </div>

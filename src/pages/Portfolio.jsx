@@ -12,6 +12,8 @@ const filters = [
     'Color Beach',
     'Ajman Government',
     'Allen Overseas',
+    'Da-Bangg Dubai',
+    'Da-Bangg Qatar',
 ];
 
 const abayaRallyImages = [
@@ -96,6 +98,7 @@ const colorBeachProjects = colorBeachImages.map((image, index) => ({
         : [1, 5].includes(index)
             ? 'lg:col-span-2'
             : '',
+    objectFit: index === 1 ? 'contain' : 'cover',
     objectPosition: 'center',
 }));
 
@@ -149,12 +152,62 @@ const allenOverseasProjects = allenOverseasImages.map((image, index) => ({
     objectPosition: 'center',
 }));
 
+const daBanggDubaiImages = [
+    '(1252)-5r.jpg',
+    'GA0A3324 5r.jpg',
+    'GA0A3429 5r.jpg',
+    'GA0A3514 5r.jpg',
+    'GA0A3683 5r.jpg',
+    'GA0A4502 5r.jpg',
+];
+
+const daBanggDubaiProjects = daBanggDubaiImages.map((image, index) => ({
+    id: `da-bangg-dubai-${index + 1}`,
+    category: 'Da-Bangg Dubai',
+    title: index === 0 ? 'Da-Bangg The Tour Reloaded in Dubai' : `Da-Bangg Dubai Moment ${String(index + 1).padStart(2, '0')}`,
+    eyebrow: index === 0 ? 'Live Entertainment Tour' : 'Da-Bangg The Tour Reloaded 2019',
+    location: 'Dubai, UAE',
+    year: '2019',
+    image: `/Da-Bangg The Tour Reloaded 2019/${image}`,
+    size: index === 0
+        ? 'lg:col-span-2 lg:row-span-2'
+        : [1, 5].includes(index)
+            ? 'lg:col-span-2'
+            : '',
+    objectPosition: 'center',
+}));
+
+const daBanggQatarImages = [
+    'DSC06779.jpg',
+    'DSC07526.jpg',
+    'DSC07839.JPG',
+    'DSC07894.JPG',
+];
+
+const daBanggQatarProjects = daBanggQatarImages.map((image, index) => ({
+    id: `da-bangg-qatar-${index + 1}`,
+    category: 'Da-Bangg Qatar',
+    title: index === 0 ? 'Da-Bangg The Tour Reloaded in Qatar' : `Da-Bangg Qatar Moment ${String(index + 1).padStart(2, '0')}`,
+    eyebrow: index === 0 ? 'Live Entertainment Tour' : 'Da-Bangg The Tour Reloaded in Qatar',
+    location: 'Qatar',
+    year: 'Tour Reloaded',
+    image: `/Da-Bangg The Tour Reloaded in Qatar/${image}`,
+    size: index === 0
+        ? 'lg:col-span-2 lg:row-span-2'
+        : [1].includes(index)
+            ? 'lg:col-span-2'
+            : '',
+    objectPosition: 'center',
+}));
+
 const projects = [
     ...abayaRallyProjects,
     ...kanduraRallyProjects,
     ...colorBeachProjects,
     ...ajmanGovernmentProjects,
     ...allenOverseasProjects,
+    ...daBanggDubaiProjects,
+    ...daBanggQatarProjects,
 ];
 
 function PortfolioGallery() {
@@ -263,8 +316,13 @@ function PortfolioGallery() {
                                 <img
                                     src={project.image}
                                     alt={project.title}
-                                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-110"
-                                    style={{ objectPosition: project.objectPosition }}
+                                    className={`absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out ${
+                                        project.objectFit === 'contain' ? '' : 'group-hover:scale-110'
+                                    }`}
+                                    style={{
+                                        objectFit: project.objectFit || 'cover',
+                                        objectPosition: project.objectPosition,
+                                    }}
                                 />
                                 <div className="absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/10 transition duration-500 group-hover:ring-cosmic-blue/50" />
                             </motion.article>
