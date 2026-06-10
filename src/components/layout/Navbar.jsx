@@ -40,7 +40,7 @@ export default function Navbar() {
             <nav className={`fixed top-0 w-full z-40 transition-all duration-500 ${isScrolled ? 'bg-deep-space/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-deep-space border-b border-white/5 py-6'}`}>
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                     <div className="relative w-56 md:w-[350px] h-12 flex items-center">
-                        <Link to="/" className="absolute left-0 top-1/2 -translate-y-[45%] transition-transform hover:scale-105 duration-300 z-50">
+                        <Link to="/" className="absolute left-0 top-1/2 -translate-y-[48%] transition-transform hover:scale-105 duration-300 z-50">
                             <img 
                                 src="/logo.png" 
                                 alt="Orbit Events" 
