@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import StarBackground from './StarBackground';
 
 export default function CtaSection() {
     return (
-        <section className="relative py-40 overflow-hidden bg-deep-space">
+        <section className="relative py-12 md:py-20 overflow-hidden bg-deep-space">
             {/* Cinematic Star Background */}
             <div className="absolute inset-0 z-0">
                 <StarBackground />
@@ -21,7 +22,7 @@ export default function CtaSection() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="relative w-full border border-white/10 bg-deep-space/40 backdrop-blur-2xl rounded-2xl p-10 md:p-16 overflow-hidden group shadow-[0_0_50px_rgba(0,0,0,0.5)]"
                 >
-                    {/* Console HUD Lines */}
+                    {/* Console HUD HUD HUD lines */}
                     <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cosmic-blue to-transparent opacity-50" />
                     <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cosmic-blue to-transparent opacity-50" />
                     
@@ -59,36 +60,40 @@ export default function CtaSection() {
                         <div className="flex flex-col gap-6 w-full lg:max-w-md ml-auto">
                             
                             {/* Primary Action - Humanized */}
-                            <motion.button 
-                                aria-label="Start a conversation with our event specialists"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="relative w-full group/btn overflow-hidden rounded-xl border border-cosmic-blue/50 bg-cosmic-blue/5 backdrop-blur-md p-1 cursor-pointer"
-                            >
-                                <div className="absolute inset-0 bg-cosmic-blue translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-in-out" />
-                                <div className="relative flex items-center justify-between px-8 py-6">
-                                    <span className="font-display font-bold text-white tracking-widest uppercase text-sm md:text-base group-hover/btn:text-deep-space transition-colors duration-500">
-                                        Start A Conversation
-                                    </span>
-                                    {/* Action Icon */}
-                                    <svg className="w-6 h-6 text-cosmic-blue group-hover/btn:text-deep-space transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                            </motion.button>
+                            <Link to="/contact" className="w-full pointer-events-auto">
+                                <motion.button 
+                                    aria-label="Start a conversation with our event specialists"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="relative w-full group/btn overflow-hidden rounded-xl border border-cosmic-blue/50 bg-cosmic-blue/5 backdrop-blur-md p-1 cursor-pointer"
+                                >
+                                    <div className="absolute inset-0 bg-cosmic-blue translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-in-out" />
+                                    <div className="relative flex items-center justify-between px-8 py-6">
+                                        <span className="font-display font-bold text-white tracking-widest uppercase text-sm md:text-base group-hover/btn:text-deep-space transition-colors duration-500">
+                                            Start A Conversation
+                                        </span>
+                                        {/* Action Icon */}
+                                        <svg className="w-6 h-6 text-cosmic-blue group-hover/btn:text-deep-space transition-colors duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                </motion.button>
+                            </Link>
  
                             {/* Secondary Action - Humanized */}
-                            <motion.button 
-                                aria-label="View our portfolio of luxury events"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="w-full flex items-center justify-between px-9 py-6 rounded-xl border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-300 group/comm cursor-pointer"
-                            >
-                                <span className="font-display font-bold text-white/70 group-hover/comm:text-white tracking-widest uppercase text-sm md:text-base">
-                                    View Our Work
-                                </span>
-                                <div className="w-3 h-3 rounded-full border border-white/50 group-hover/comm:bg-white transition-colors duration-300" />
-                            </motion.button>
+                            <Link to="/portfolio" className="w-full pointer-events-auto">
+                                <motion.button 
+                                    aria-label="View our portfolio of luxury events"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="w-full flex items-center justify-between px-9 py-6 rounded-xl border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-300 group/comm cursor-pointer"
+                                >
+                                    <span className="font-display font-bold text-white/70 group-hover/comm:text-white tracking-widest uppercase text-sm md:text-base">
+                                        View Our Work
+                                    </span>
+                                    <div className="w-3 h-3 rounded-full border border-white/50 group-hover/comm:bg-white transition-colors duration-300" />
+                                </motion.button>
+                            </Link>
  
                             {/* Decorative coordinate layout beneath buttons */}
                             <div className="flex justify-between w-full px-2 text-[10px] text-white/30 font-mono tracking-[0.2em] mt-4 border-t border-white/5 pt-4">

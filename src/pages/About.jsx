@@ -54,7 +54,7 @@ const values = [
 
 export default function About() {
     return (
-        <div className="bg-deep-space min-h-screen pb-32">
+        <div className="bg-deep-space min-h-screen pb-8 md:pb-32">
             {/* Hero Section */}
             <section className="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden border-b border-white/5">
                 <div className="absolute inset-0 z-0">
@@ -66,9 +66,9 @@ export default function About() {
                         alt="Deep Space Background" 
                         className="w-full h-full object-cover select-none pointer-events-none"
                     />
-                    {/* Cinematic Overlays (Softened for clarity) */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-deep-space/50 via-transparent to-deep-space/80 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-deep-space/30 via-transparent to-deep-space/30 z-10" />
+                    {/* Cinematic Overlays (Softened for mobile clarity) */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-deep-space/20 md:from-deep-space/50 via-transparent to-deep-space/60 md:to-deep-space/80 z-10 hidden md:block" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-deep-space/10 md:from-deep-space/30 via-transparent to-deep-space/10 md:to-deep-space/30 z-10 hidden md:block" />
                 </div>
                 
                 {/* Holographic Radar/Grid Elements */}
@@ -103,7 +103,7 @@ export default function About() {
                             <span className="font-bold text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">Orbit</span> Events
                         </h1>
 
-                        <p className="text-starlight/60 text-sm md:text-base max-w-2xl mx-auto font-light mt-6 font-mono tracking-widest uppercase leading-relaxed">
+                        <p className="text-starlight/60 max-w-2xl mx-auto text-lg font-light mt-6 leading-relaxed">
                             At Orbit Events, we don’t just organize events—we engineer experiences. Driven by precision, creativity, and control, our team transforms ideas into seamless, high-impact moments that elevate brands and captivate audiences.
                         </p>
                     </motion.div>
@@ -122,7 +122,7 @@ export default function About() {
             REDESIGNED ORIGIN MODULE (Who We Are)
             ====================================
             */}
-            <section className="relative mb-8 pt-8 md:pt-12 overflow-hidden min-h-[700px] w-full">
+            <section className="relative mb-8 pt-8 md:pt-12 overflow-hidden min-h-[500px] lg:min-h-[700px] w-full">
                 {/* Background decorative typography */}
                 <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-[15vw] font-display font-black text-white/[0.02] tracking-tighter leading-none select-none pointer-events-none z-0 whitespace-nowrap">
                     THE ORIGIN
@@ -133,7 +133,7 @@ export default function About() {
                     <img
                         src="/space/astronaut.png"
                         alt="Orbit Astronaut"
-                        className="w-full h-full object-cover object-left-bottom select-none opacity-55"
+                        className="w-full h-full object-cover object-[-320px_bottom] md:object-left-bottom select-none opacity-55"
                     />
                     {/* Subtle dark overlay to keep text readable without hiding the astronaut */}
                     <div className="absolute inset-0 bg-deep-space/30" />
@@ -144,7 +144,7 @@ export default function About() {
 
                 <div className="max-w-[1400px] mx-auto px-6 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-12 items-center">
-                        <div className="lg:col-span-5" />
+                        <div className="hidden lg:block lg:col-span-5" />
 
                         {/* Right: Architectural Content Structure */}
                         <div className="lg:col-span-7 lg:pl-12">
@@ -155,8 +155,8 @@ export default function About() {
                             >
                                 {/* Header Block */}
                                 <div className="relative mb-4">
-                                    <h2 className="text-5xl md:text-6xl lg:text-[70px] font-display font-black text-white leading-[1.05] tracking-tighter">
-                                        Who We <span className="text-cosmic-blue italic font-light">Are?</span>
+                                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                                        Who We Are?
                                     </h2>
                                 </div>
 
@@ -262,29 +262,29 @@ export default function About() {
                         
                         <motion.h2 
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-8xl font-display font-black text-white mb-6 tracking-tighter"
+                            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                         >
-                            Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/50 to-white/20 italic">Values</span>
+                            Core Values
                         </motion.h2>
                         <motion.p
                             animate={{ opacity: 1 }}
-                            className="text-starlight/40 max-w-2xl mx-auto font-light tracking-widest uppercase text-[10px] md:text-xs leading-relaxed"
+                            className="text-starlight/60 max-w-2xl mx-auto text-lg font-light leading-relaxed"
                         >
                             Built on precision, innovation, and control, our core values guide every Orbit Event—ensuring seamless execution, elevated experiences, and results that leave a lasting impact.
                         </motion.p>
                     </div>
 
                     {/* Satellite Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-32 gap-x-20 lg:gap-x-48 relative z-10 pt-0 px-4 lg:px-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-6 lg:gap-x-16 relative z-10 pt-0 px-4 lg:px-8">
                         {values.map((val, i) => (
                             <motion.div
                                 key={val.title}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: i * 0.15 }}
-                                className="group relative flex items-center justify-center h-[500px]"
+                                className="group relative flex items-center justify-center h-[480px] lg:h-[450px]"
                             >
                                 {/* Left Solar Wing */}
-                                <div className="absolute left-[-20px] md:left-[-40px] lg:left-[-60px] top-1/2 -translate-y-1/2 w-[80px] md:w-[120px] lg:w-[160px] h-[180px] md:h-[220px] lg:h-[260px] z-0 transition-transform duration-700 group-hover:-translate-x-4">
+                                <div className="absolute left-[-15px] md:left-[-30px] lg:left-[-15px] top-1/2 -translate-y-1/2 w-[60px] md:w-[100px] lg:w-[50px] h-[150px] md:h-[200px] lg:h-[140px] z-0 transition-transform duration-700 group-hover:-translate-x-3">
                                     <div className="w-full h-full bg-cosmic-blue/10 backdrop-blur-md border border-cosmic-blue/30 relative overflow-hidden flex items-center justify-center">
                                         <div className="absolute inset-0 bg-[linear-gradient(rgba(79,209,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(79,209,255,0.2)_1px,transparent_1px)] bg-[size:15px_15px] opacity-40" />
                                         <div className="w-[80%] h-[2px] bg-cosmic-blue/40 shadow-[0_0_15px_#4FD1FF]" />
@@ -294,7 +294,7 @@ export default function About() {
                                 </div>
 
                                 {/* Right Solar Wing */}
-                                <div className="absolute right-[-20px] md:right-[-40px] lg:right-[-60px] top-1/2 -translate-y-1/2 w-[80px] md:w-[120px] lg:w-[160px] h-[180px] md:h-[220px] lg:h-[260px] z-0 transition-transform duration-700 group-hover:translate-x-4">
+                                <div className="absolute right-[-15px] md:right-[-30px] lg:right-[-15px] top-1/2 -translate-y-1/2 w-[60px] md:w-[100px] lg:w-[50px] h-[150px] md:h-[200px] lg:h-[140px] z-0 transition-transform duration-700 group-hover:translate-x-3">
                                     <div className="w-full h-full bg-cosmic-blue/10 backdrop-blur-md border border-cosmic-blue/30 relative overflow-hidden flex items-center justify-center">
                                         <div className="absolute inset-0 bg-[linear-gradient(rgba(79,209,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(79,209,255,0.2)_1px,transparent_1px)] bg-[size:15px_15px] opacity-40" />
                                         <div className="w-[80%] h-[2px] bg-cosmic-blue/40 shadow-[0_0_15px_#4FD1FF]" />
@@ -305,7 +305,7 @@ export default function About() {
 
                                 {/* Central Satellite Body */}
                                 <div 
-                                    className="relative w-full max-w-[320px] md:max-w-[380px] h-full bg-[#0A0E17] border border-white/20 z-10 transition-all duration-700 group-hover:border-cosmic-blue group-hover:shadow-[0_0_80px_rgba(79,209,255,0.15)] flex flex-col items-center p-8 md:p-10 text-center"
+                                    className="relative w-full max-w-[280px] md:max-w-[340px] lg:max-w-[230px] h-full bg-[#0A0E17] border border-white/20 z-10 transition-all duration-700 group-hover:border-cosmic-blue group-hover:shadow-[0_0_80px_rgba(79,209,255,0.15)] flex flex-col items-center p-6 md:p-8 lg:p-5 text-center"
                                     style={{ clipPath: 'polygon(20% 0%, 80% 0%, 100% 15%, 100% 85%, 80% 100%, 20% 100%, 0% 85%, 0% 15%)' }}
                                 >
                                     {/* Image Overlay with low opacity */}
@@ -317,25 +317,25 @@ export default function About() {
                                             className="w-full h-full object-cover opacity-20 grayscale group-hover:grayscale-0 group-hover:opacity-40 transition-all duration-[2s]"
                                         />
                                     </div>
-
+ 
                                     {/* Satellite Head (Communication Dish) */}
-                                    <div className="relative z-20 w-16 h-16 rounded-full border-2 border-cosmic-blue/50 flex items-center justify-center mb-8 bg-black group-hover:scale-110 transition-transform duration-500">
+                                    <div className="relative z-20 w-14 h-14 rounded-full border-2 border-cosmic-blue/50 flex items-center justify-center mb-6 bg-black group-hover:scale-110 transition-transform duration-500">
                                         <div className="absolute inset-[-4px] rounded-full border border-dashed border-cosmic-blue/30 animate-[spin_15s_linear_infinite]" />
-                                        <val.icon size={28} className="text-cosmic-blue" />
+                                        <val.icon size={24} className="text-cosmic-blue" />
                                     </div>
-
+ 
                                     {/* Text Content */}
-                                    <div className="relative z-20 flex-1 flex flex-col items-center">
-                                        <div className="text-[10px] font-mono text-cosmic-blue tracking-[0.4em] uppercase mb-2 opacity-60 group-hover:opacity-100 transition-opacity">Protocol {val.id}</div>
-                                        <h3 className="text-2xl md:text-3xl font-display font-black text-white mb-6 leading-tight">
+                                    <div className="relative z-20 flex-1 flex flex-col items-center w-full">
+                                        <div className="text-[9px] font-mono text-cosmic-blue tracking-[0.4em] uppercase mb-2 opacity-60 group-hover:opacity-100 transition-opacity">Protocol {val.id}</div>
+                                        <h3 className="text-2xl md:text-3xl lg:text-lg xl:text-xl font-display font-black text-white mb-4 leading-tight flex items-center justify-center min-h-[64px] lg:min-h-[72px] w-full px-2">
                                             {val.title}
                                         </h3>
-                                        <div className="w-8 h-[2px] bg-white/10 mb-6 group-hover:w-20 group-hover:bg-cosmic-blue transition-all duration-500" />
-                                        <p className="text-starlight/60 text-sm md:text-base leading-relaxed font-light">
+                                        <div className="w-8 h-[2px] bg-white/10 mb-4 group-hover:w-16 group-hover:bg-cosmic-blue transition-all duration-500 shrink-0" />
+                                        <p className="text-starlight/60 text-xs md:text-sm leading-relaxed font-light min-h-[72px] flex items-start justify-center">
                                             {val.desc}
                                         </p>
                                     </div>
-
+ 
                                     {/* Bottom Tech Detail */}
                                     <div className="relative z-20 mt-6 flex flex-col items-center gap-2">
                                         <div className="flex gap-1">

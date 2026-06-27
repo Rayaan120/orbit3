@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Maximize2, Play, X } from 'lucide-react';
 import { gsap } from 'gsap';
+import { createPortal } from 'react-dom';
 
 const reels = [
     {
@@ -143,7 +144,7 @@ function ReelCard({ reel, dimmed = false, mobile = false, onOpen }) {
 }
 
 function VideoModal({ reel, onClose }) {
-    return (
+    return createPortal(
         <motion.div
             role="dialog"
             aria-modal="true"
@@ -153,24 +154,25 @@ function VideoModal({ reel, onClose }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
             onClick={onClose}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#02040a]/95 p-4 backdrop-blur-2xl md:p-8"
+            className="fixed inset-0 z-[9999] overflow-y-auto bg-[#02040a]/95 p-4 backdrop-blur-2xl md:p-8 flex justify-center items-start"
         >
+            <button
+                type="button"
+                onClick={onClose}
+                aria-label="Close video"
+                className="fixed right-6 top-6 z-[10000] flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/60 text-white backdrop-blur-xl transition hover:rotate-90 hover:bg-white hover:text-[#07101d] shadow-2xl"
+            >
+                <X size={22} />
+            </button>
+
             <motion.div
                 initial={{ opacity: 0, scale: 0.88, y: 30 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.92, y: 20 }}
                 transition={{ type: 'spring', stiffness: 170, damping: 24 }}
                 onClick={(event) => event.stopPropagation()}
-                className="relative w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#070b13] shadow-[0_0_120px_rgba(79,209,255,0.18)]"
+                className="relative my-auto w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/15 bg-[#070b13] shadow-[0_0_120px_rgba(79,209,255,0.18)]"
             >
-                <button
-                    type="button"
-                    onClick={onClose}
-                    aria-label="Close video"
-                    className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-xl transition hover:rotate-90 hover:bg-white hover:text-[#07101d]"
-                >
-                    <X size={20} />
-                </button>
 
                 <div className="relative aspect-video overflow-hidden bg-black">
                     {reel.videoType === 'youtube' ? (
@@ -214,7 +216,8 @@ function VideoModal({ reel, onClose }) {
                     </div>
                 </div>
             </motion.div>
-        </motion.div>
+        </motion.div>,
+        document.body
     );
 }
 
@@ -389,9 +392,9 @@ export default function PortfolioVideoShowcase() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.65, delay: 0.06 }}
-                        className="font-display text-5xl font-black uppercase leading-[0.92] tracking-[-0.055em] text-white sm:text-6xl md:text-8xl"
+                        className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                     >
-                        Video <span className="text-white/70">Showcase</span>
+                        Video Showcase
                     </motion.h2>
 
                     <motion.p
@@ -399,7 +402,7 @@ export default function PortfolioVideoShowcase() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.55, delay: 0.14 }}
-                        className="mx-auto mt-6 max-w-3xl text-sm leading-7 text-white/55 md:text-lg md:leading-8"
+                        className="text-starlight/60 max-w-2xl mx-auto text-lg font-light leading-relaxed mt-6"
                     >
                         Explore a collection of cinematic event highlights, immersive productions, and unforgettable
                         experiences captured across Orbit Events projects.
@@ -408,7 +411,7 @@ export default function PortfolioVideoShowcase() {
 
                 <div
                     ref={stageRef}
-                    className="relative mt-14 hidden h-[650px] w-full md:block lg:h-[720px] [perspective:1500px]"
+                    className="relative mt-8 h-[450px] xs:h-[520px] sm:h-[650px] w-full lg:h-[720px] [perspective:1500px]"
                 >
                     <div
                         ref={cameraRef}
@@ -428,7 +431,7 @@ export default function PortfolioVideoShowcase() {
                                     transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                                     onMouseEnter={() => setHoveredId(reel.id)}
                                     onMouseLeave={() => setHoveredId(null)}
-                                    className="absolute left-1/2 top-1/2 h-[500px] w-[238px] will-change-transform lg:h-[570px] lg:w-[286px] [transform-style:preserve-3d]"
+                                    className="absolute left-1/2 top-1/2 h-[340px] w-[170px] xs:h-[400px] xs:w-[200px] sm:h-[500px] sm:w-[238px] lg:h-[570px] lg:w-[286px] will-change-transform [transform-style:preserve-3d]"
                                 >
                                     <ReelCard
                                         reel={reel}
@@ -446,30 +449,9 @@ export default function PortfolioVideoShowcase() {
                     <div className="pointer-events-none absolute inset-x-[17%] bottom-14 z-[110] h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                 </div>
 
-                <div className="relative mt-12 md:hidden">
-                    <motion.div layout className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                        <AnimatePresence mode="popLayout">
-                            {reels.map((reel) => (
-                                <motion.article
-                                    layout
-                                    key={reel.id}
-                                    initial={{ opacity: 0, x: 24, scale: 0.96 }}
-                                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                                    exit={{ opacity: 0, x: -24, scale: 0.94 }}
-                                    transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                                    className="h-[470px] w-[78vw] max-w-[310px] shrink-0 snap-center"
-                                >
-                                    <ReelCard reel={reel} mobile onOpen={setSelectedReel} />
-                                </motion.article>
-                            ))}
-                        </AnimatePresence>
-                    </motion.div>
-                </div>
-
-                <div className="mt-2 flex items-center justify-center gap-3 font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 md:-mt-2">
+                <div className="mt-6 flex items-center justify-center gap-3 font-mono text-[9px] uppercase tracking-[0.3em] text-white/30 md:mt-2">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cosmic-blue shadow-[0_0_12px_rgba(79,209,255,0.8)]" />
-                    <span className="hidden md:inline">Auto orbit / Hover to pause / Select to play</span>
-                    <span className="md:hidden">Swipe to explore / Select to play</span>
+                    <span>Auto orbit / Hover to pause / Select to play</span>
                 </div>
             </div>
 

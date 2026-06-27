@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const projects = [
     {
@@ -77,18 +78,20 @@ export default function Portfolio() {
                             Explore our successful planetary landings and deep space activations. We engineer experiences that defy gravity and leave lasting orbital impressions.
                         </p>
                     </div>
-                    <motion.button 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="relative px-8 py-4 rounded-full border border-white/20 overflow-hidden group hover:border-transparent transition-colors duration-500 bg-white/5 backdrop-blur-sm shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-[0_0_30px_rgba(79,209,255,0.2)]"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-r from-cosmic-blue to-nebula-purple opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <span className="relative z-10 text-white font-medium flex items-center gap-3 tracking-wide">
-                            Explore All Missions
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                        </span>
-                    </motion.button>
+                    <Link to="/portfolio" className="pointer-events-auto">
+                        <motion.button 
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="relative px-8 py-4 rounded-full border border-white/20 overflow-hidden group hover:border-transparent transition-colors duration-500 bg-white/5 backdrop-blur-sm shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:shadow-[0_0_30px_rgba(79,209,255,0.2)]"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-cosmic-blue to-nebula-purple opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <span className="relative z-10 text-white font-medium flex items-center gap-3 tracking-wide">
+                                Explore All Missions
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                            </span>
+                        </motion.button>
+                    </Link>
                 </div>
 
                 {/* Interactive Gallery */}
@@ -181,9 +184,11 @@ export default function Portfolio() {
                                                 </div>
                                             </div>
                                             
-                                            <button className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white text-deep-space flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="translate-x-0.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                                            </button>
+                                            <Link to="/portfolio" className="pointer-events-auto">
+                                                <button className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white text-deep-space flex items-center justify-center hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="translate-x-0.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

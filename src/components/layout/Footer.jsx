@@ -13,7 +13,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
                     {/* Brand */}
                     <div className="md:col-span-1 flex flex-col items-start">
-                        <Link to="/" className="transition-transform hover:scale-105 duration-300 -ml-16 -mt-16">
+                        <Link to="/" className="transition-transform hover:scale-105 duration-300 -ml-24 -mt-16">
                             <img 
                                 src="/logo.png" 
                                 alt="Orbit Events" 
@@ -24,7 +24,7 @@ export default function Footer() {
                             Designing extraordinary brand experiences that move beyond gravity and into unforgettable moments.
                         </p>
                         <div className="flex flex-wrap gap-3 mt-8">
-                            <a href="https://www.instagram.com/orbitevents.ae/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 glass flex items-center justify-center text-starlight/80 hover:text-cosmic-blue hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all">
+                            <a href="https://www.instagram.com/orbit__events/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 glass flex items-center justify-center text-starlight/80 hover:text-cosmic-blue hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all">
                                 <Instagram size={18} />
                             </a>
                             <a href="https://x.com/orbit_eventsuae" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 glass flex items-center justify-center text-starlight/80 hover:text-cosmic-blue hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all">
@@ -38,11 +38,6 @@ export default function Footer() {
                             </a>
                             <a href="https://www.youtube.com/@OrbitEventsUAE" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 glass flex items-center justify-center text-starlight/80 hover:text-cosmic-blue hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all">
                                 <Youtube size={18} />
-                            </a>
-                            <a href="https://www.tiktok.com/@orbiteventsdubai" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 glass flex items-center justify-center text-starlight/80 hover:text-cosmic-blue hover:border-cosmic-blue/50 hover:shadow-[0_0_15px_rgba(79,209,255,0.3)] transition-all">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-                                </svg>
                             </a>
                         </div>
                     </div>

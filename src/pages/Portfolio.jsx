@@ -9,20 +9,15 @@ const filters = [
     'All',
     'Abaya Rally',
     'Kandura Rally',
-    'Color Beach',
     'Ajman Government',
-    'Allen Overseas',
     'Da-Bangg Dubai',
     'Da-Bangg Qatar',
 ];
 
 const abayaRallyImages = [
-    '(431).JPG',
     '(473).JPG',
-    '(918).JPG',
     'IMG_4577.jpg',
     'IMG_4631.jpg',
-    'IMG_4656.jpg',
 ];
 
 const abayaRallyProjects = abayaRallyImages.map((image, index) => ({
@@ -35,23 +30,17 @@ const abayaRallyProjects = abayaRallyImages.map((image, index) => ({
     image: `/Abaya Rally 2020/${image}`,
     size: index === 0
         ? 'lg:col-span-2 lg:row-span-2'
-        : [1, 4].includes(index)
-            ? 'lg:col-span-2'
-            : '',
+        : 'lg:col-span-2',
     objectPosition: 'center',
 }));
 
 const kanduraRallyImages = [
-    '0A6A1395.JPG',
-    '0A6A1404.JPG',
-    '0A6A1442.JPG',
     '1-2.jpg',
     '1-3.jpg',
     'DSC_0031.JPG',
     'DSC_0046.JPG',
     'DSC_0050.JPG',
     'DSC_0067.JPG',
-    'DSC_0074.JPG',
     'DSC_0096.JPG',
     'DSC_9429.JPG',
     'DSC_9511.JPG',
@@ -69,38 +58,12 @@ const kanduraRallyProjects = kanduraRallyImages.map((image, index) => ({
     image: `/Kandura Rally 2026/${image}`,
     size: index === 0
         ? 'lg:col-span-2 lg:row-span-2'
-        : [1, 6, 10, 14].includes(index)
+        : [1, 6].includes(index)
             ? 'lg:col-span-2'
             : '',
     objectPosition: 'center',
 }));
 
-const colorBeachImages = [
-    '(1).JPG',
-    '(43).JPG',
-    '(450).JPG',
-    '(595).JPG',
-    '(60).JPG',
-    '(688).JPG',
-    'HAS_4748.jpg',
-];
-
-const colorBeachProjects = colorBeachImages.map((image, index) => ({
-    id: `color-beach-${index + 1}`,
-    category: 'Color Beach',
-    title: index === 0 ? 'Color Beach Festival 2022' : `Color Beach Moment ${String(index + 1).padStart(2, '0')}`,
-    eyebrow: index === 0 ? 'Beachfront Live Experience' : 'Color Beach 2022',
-    location: 'Dubai, UAE',
-    year: '2022',
-    image: `/Color Beach 2022/${image}`,
-    size: index === 0
-        ? 'lg:col-span-2 lg:row-span-2'
-        : [1, 5].includes(index)
-            ? 'lg:col-span-2'
-            : '',
-    objectFit: index === 1 ? 'contain' : 'cover',
-    objectPosition: 'center',
-}));
 
 const ajmanGovernmentImages = [
     'RED00058.JPG',
@@ -120,35 +83,7 @@ const ajmanGovernmentProjects = ajmanGovernmentImages.map((image, index) => ({
     image: `/Ajman Government - UAE National Day/${image}`,
     size: index === 0
         ? 'lg:col-span-2 lg:row-span-2'
-        : [1].includes(index)
-            ? 'lg:col-span-2'
-            : '',
-    objectPosition: 'center',
-}));
-
-const allenOverseasImages = [
-    'DSC04459.jpg',
-    'DSC04510.jpg',
-    'DSC04515.jpg',
-    'DSC04555.jpg',
-    'DSC04587.jpg',
-    'DSC04626.jpg',
-    'DSC04697.jpg',
-];
-
-const allenOverseasProjects = allenOverseasImages.map((image, index) => ({
-    id: `allen-overseas-success-carnival-${index + 1}`,
-    category: 'Allen Overseas',
-    title: index === 0 ? 'Allen Overseas Success Carnival' : `Success Carnival Moment ${String(index + 1).padStart(2, '0')}`,
-    eyebrow: index === 0 ? 'Education Success Celebration' : 'Allen Overseas Success Carnival',
-    location: 'UAE',
-    year: 'Success Carnival',
-    image: `/Allen Overseas - Success Carnival/${image}`,
-    size: index === 0
-        ? 'lg:col-span-2 lg:row-span-2'
-        : [1, 5].includes(index)
-            ? 'lg:col-span-2'
-            : '',
+        : 'lg:col-span-2',
     objectPosition: 'center',
 }));
 
@@ -171,7 +106,7 @@ const daBanggDubaiProjects = daBanggDubaiImages.map((image, index) => ({
     image: `/Da-Bangg The Tour Reloaded 2019/${image}`,
     size: index === 0
         ? 'lg:col-span-2 lg:row-span-2'
-        : [1, 5].includes(index)
+        : [1, 4, 5].includes(index)
             ? 'lg:col-span-2'
             : '',
     objectPosition: 'center',
@@ -203,9 +138,7 @@ const daBanggQatarProjects = daBanggQatarImages.map((image, index) => ({
 const projects = [
     ...abayaRallyProjects,
     ...kanduraRallyProjects,
-    ...colorBeachProjects,
     ...ajmanGovernmentProjects,
-    ...allenOverseasProjects,
     ...daBanggDubaiProjects,
     ...daBanggQatarProjects,
 ];
@@ -245,7 +178,7 @@ function PortfolioGallery() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.05 }}
-                            className="font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-white md:text-6xl lg:text-7xl"
+                            className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                         >
                             Portfolio Gallery
                         </motion.h2>
@@ -254,7 +187,7 @@ function PortfolioGallery() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: 0.12 }}
-                            className="mt-6 max-w-2xl text-base leading-8 text-starlight/60 md:text-lg"
+                            className="text-starlight/60 max-w-2xl text-lg font-light leading-relaxed mt-6"
                         >
                             A curated view of rallies, beachfront productions, government programs, and brand experiences delivered with Orbit's production detail.
                         </motion.p>
@@ -457,12 +390,11 @@ export default function Portfolio() {
 
                         <h1 id="portfolio-hero-heading" className="mb-6 font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight md:text-7xl lg:text-8xl">
                             Event Portfolio
-                            <span className="mt-2 block text-white/75">Dubai & UAE</span>
                         </h1>
 
                         <p className="mx-auto mb-8 max-w-4xl text-lg font-light leading-8 text-starlight/70 md:text-xl">
                             Explore corporate events, brand activations, rallies, festivals, government celebrations,
-                            awards nights, and immersive productions delivered by Orbit Events across Dubai and the UAE.
+                            awards nights, and immersive productions delivered by Orbit Events.
                         </p>
 
                         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">

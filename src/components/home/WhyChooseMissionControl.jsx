@@ -87,8 +87,8 @@ const WhyChooseMissionControl = () => {
                     transition={{ duration: 0.8 }}
                     className="mb-16 md:mb-24 text-center max-w-3xl mx-auto"
                 >
-                    <h2 className="text-4xl md:text-6xl font-display font-black tracking-tight mb-6 text-white">
-                        Why Choose <span className="italic font-light text-cosmic-blue">Orbit Events</span>
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 tracking-tight text-white drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                        Why Choose Orbit Events
                     </h2>
                     <p className="text-white/40 text-lg leading-relaxed font-light tracking-wide">
                         We operate every event like a mission command system—combining strategy, creativity, precision, and full-spectrum control to deliver seamless experiences with lasting impact.

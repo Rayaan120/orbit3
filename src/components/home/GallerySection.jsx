@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 const images = [
     {
-        url: "/homeport/1.jpg",
-        title: "Orbit Events portfolio image 1",
+        url: "/work/dabangg.JPG",
+        title: "Dabangg The Tour",
         tag: "ARCHIVE // 01"
     },
     {
@@ -28,8 +28,8 @@ export default function GallerySection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-4 tracking-tight">
-                            Our <span className="text-cosmic-blue italic font-light">Work</span>
+                        <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                            Our Work
                         </h2>
                         <div className="h-[1px] w-24 bg-cosmic-blue mx-auto mb-6 opacity-50" />
                         <p className="text-starlight/60 max-w-2xl mx-auto text-lg font-light leading-relaxed">
@@ -38,7 +38,7 @@ export default function GallerySection() {
                     </motion.div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 lg:gap-16">
                     {images.map((img, index) => (
                         <motion.div
                             key={index}
@@ -46,23 +46,23 @@ export default function GallerySection() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.2, duration: 0.8 }}
-                            className="group relative"
+                            className="group relative px-1 sm:px-0"
                         >
                             {/* High-tech frame */}
-                            <div className="absolute -inset-4 border border-white/5 rounded-3xl pointer-events-none group-hover:border-cosmic-blue/20 transition-colors duration-700" />
+                            <div className="absolute -inset-2 sm:-inset-4 border border-white/5 rounded-3xl pointer-events-none group-hover:border-cosmic-blue/20 transition-colors duration-700" />
                             
                             {/* Content wrapper */}
-                            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+                            <div className="relative aspect-[4/3.2] sm:aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 shadow-2xl scale-[1.02] sm:scale-100">
                                 <motion.img
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 1.2, ease: "easeOut" }}
                                     src={img.url}
                                     alt={img.title}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover brightness-105 contrast-105"
                                 />
                                 
                                 {/* Overlay Gradient */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent opacity-80" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent opacity-40 pointer-events-none" />
                                 
                                 {/* Corner Accents */}
                                 <div className="absolute top-6 left-6 flex flex-col gap-1">

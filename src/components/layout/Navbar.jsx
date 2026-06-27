@@ -38,13 +38,13 @@ export default function Navbar() {
             />
 
             <nav className={`fixed top-0 w-full z-40 transition-all duration-500 ${isScrolled ? 'bg-deep-space/80 backdrop-blur-md border-b border-white/10 py-4' : 'bg-deep-space border-b border-white/5 py-6'}`}>
-                <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                <div className="max-w-7xl mx-auto px-4 md:px-6 flex justify-between items-center">
                     <div className="relative w-56 md:w-[350px] h-12 flex items-center">
-                        <Link to="/" className="absolute left-0 top-1/2 -translate-y-[48%] transition-transform hover:scale-105 duration-300 z-50">
+                        <Link to="/" className="absolute left-0 -ml-16 md:-ml-24 top-1/2 -translate-y-[48%] transition-transform hover:scale-105 duration-300 z-50">
                             <img 
                                 src="/logo.png" 
                                 alt="Orbit Events" 
-                                className="h-32 w-auto md:h-60 object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.25)]"
+                                className="h-32 w-auto md:h-32 object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.25)]"
                             />
                         </Link>
                     </div>
@@ -65,7 +65,6 @@ export default function Navbar() {
                                 />
                             </Link>
                         ))}
-
                     </div>
 
                     {/* Mobile Menu Toggle */}

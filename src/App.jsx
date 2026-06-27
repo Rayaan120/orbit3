@@ -50,7 +50,7 @@ function App() {
             <div className="relative min-h-screen bg-deep-space flex flex-col font-sans overflow-x-hidden">
                 {/* Background Canvas for Space Effect */}
                 <div className="fixed inset-0 z-0 pointer-events-none">
-                    <Canvas camera={{ position: [0, 0, 1] }}>
+                    <Canvas camera={{ position: [0, 0, 1] }} style={{ touchAction: 'auto', pointerEvents: 'none' }}>
                         <Suspense fallback={null}>
                             <Starfield />
                         </Suspense>

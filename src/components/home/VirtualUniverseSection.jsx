@@ -2,6 +2,7 @@ import React, { useRef, useState, Suspense, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars, Html, useTexture, Float, Billboard } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import * as THREE from 'three';
 import { Briefcase, Zap, Layout, Rocket, Users, X, ArrowRight, Loader, Globe, Trophy } from 'lucide-react';
 
@@ -26,8 +27,8 @@ const PLANETS = [
         hasRings: false,
         marsColor: false,
         accentColor: "#4FD1FF",
-        radius: 4,
-        size: 1.1,
+        radius: 5,
+        size: 1.2,
         orbitSpeed: 0.18,
         selfRotation: 0.4,
         tilt: 0,
@@ -48,8 +49,8 @@ const PLANETS = [
         hasRings: false,
         marsColor: true, // apply reddish tint via material color
         accentColor: "#E57A44",
-        radius: 6,
-        size: 0.8,
+        radius: 8,
+        size: 1.8,
         orbitSpeed: 0.12,
         selfRotation: 0.5,
         tilt: 0,
@@ -70,8 +71,8 @@ const PLANETS = [
         hasRings: false,
         marsColor: false,
         accentColor: "#D4A96A",
-        radius: 9,
-        size: 1.8,
+        radius: 12,
+        size: 1.7,
         orbitSpeed: 0.07,
         selfRotation: 0.9,
         tilt: 0,
@@ -93,8 +94,8 @@ const PLANETS = [
         marsColor: false,
         ringTextureUrl: "/textures/planets/saturn_ring.png",
         accentColor: "#C9A84C",
-        radius: 12.5,
-        size: 1.6,
+        radius: 16,
+        size: 3.5,
         orbitSpeed: 0.05,
         selfRotation: 0.7,
         tilt: 0,
@@ -115,8 +116,8 @@ const PLANETS = [
         hasRings: false,
         marsColor: false,
         accentColor: "#E8B866",
-        radius: 16.5,
-        size: 1.0,
+        radius: 21,
+        size: 2.3,
         orbitSpeed: 0.035,
         selfRotation: 0.12,
         tilt: 0,
@@ -137,8 +138,8 @@ const PLANETS = [
         hasRings: false,
         marsColor: false,
         accentColor: "#06B6D4",
-        radius: 20.5,
-        size: 1.2,
+        radius: 26,
+        size: 2.7,
         orbitSpeed: 0.02,
         selfRotation: 0.3,
         tilt: 0,
@@ -159,8 +160,8 @@ const PLANETS = [
         hasRings: false,
         marsColor: false,
         accentColor: "#10B981",
-        radius: 24.5,
-        size: 1.1,
+        radius: 31,
+        size: 2.4,
         orbitSpeed: 0.015,
         selfRotation: 0.25,
         tilt: 0,
@@ -181,8 +182,8 @@ const PLANETS = [
         hasRings: false,
         marsColor: false,
         accentColor: "#D6B17A",
-        radius: 24.5,
-        size: 0.75,
+        radius: 36,
+        size: 1.7,
         orbitSpeed: 0.022,
         selfRotation: 0.35,
         tilt: 0,
@@ -194,19 +195,22 @@ const PLANETS = [
 // CAMERA CONTROLLER
 // ============================================================
 function CameraController({ targetPosition, isZoomed }) {
-    const { camera } = useThree();
-    const defaultPos = new THREE.Vector3(0, 24, 52);
+    const { camera, size } = useThree();
+    const isMobile = size.width < 768;
+    const defaultPos = isMobile ? new THREE.Vector3(0, 55, 126) : new THREE.Vector3(0, 30, 68);
 
     useFrame((state, delta) => {
         if (isZoomed && targetPosition) {
             const dir = new THREE.Vector3().subVectors(targetPosition, new THREE.Vector3(0, 0, 0)).normalize();
-            const offset = targetPosition.clone().add(dir.multiplyScalar(3.5)).add(new THREE.Vector3(0, 1.5, 0));
+            // On mobile, keep offset slightly more distant when zoomed to prevent clipping
+            const multiplier = isMobile ? 5.0 : 3.5;
+            const offset = targetPosition.clone().add(dir.multiplyScalar(multiplier)).add(new THREE.Vector3(0, isMobile ? 2.5 : 1.5, 0));
             camera.position.lerp(offset, 3 * delta);
             camera.lookAt(targetPosition);
         } else {
             const targetCamPos = defaultPos.clone().add(new THREE.Vector3(
-                state.pointer.x * 2,
-                state.pointer.y * 1.5,
+                state.pointer.x * (isMobile ? 1 : 2),
+                state.pointer.y * (isMobile ? 1 : 1.5),
                 0
             ));
             camera.position.lerp(targetCamPos, 1.5 * delta);
@@ -234,16 +238,16 @@ function Sun() {
     return (
         <group>
             <mesh ref={meshRef}>
-                <sphereGeometry args={[1.8, 64, 64]} />
+                <sphereGeometry args={[2.5, 64, 64]} />
                 <meshBasicMaterial map={sunTexture} />
             </mesh>
             {/* Atmospheric glow layers */}
             <mesh ref={glowRef} scale={1.15}>
-                <sphereGeometry args={[1.8, 32, 32]} />
+                <sphereGeometry args={[2.5, 32, 32]} />
                 <meshBasicMaterial color="#FFA500" transparent opacity={0.12} blending={THREE.AdditiveBlending} depthWrite={false} />
             </mesh>
             <mesh scale={1.35}>
-                <sphereGeometry args={[1.8, 32, 32]} />
+                <sphereGeometry args={[2.5, 32, 32]} />
                 <meshBasicMaterial color="#FF6600" transparent opacity={0.05} blending={THREE.AdditiveBlending} depthWrite={false} />
             </mesh>
             {/* Core point light - sun as light source */}
@@ -298,6 +302,7 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
     const orbitRef = useRef();
     const meshRef = useRef();
     const [hovered, setHover] = useState(false);
+    const hoverTimeout = useRef(null);
 
     // Random starting angle so planets don't all begin at the same position
     const initialAngle = React.useMemo(() => Math.random() * Math.PI * 2, []);
@@ -326,7 +331,6 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
 
     useFrame((state, delta) => {
         if (orbitRef.current) orbitRef.current.rotation.y += data.orbitSpeed * delta;
-        // No need for mesh rotation if it's a billboard facing camera
     });
 
 
@@ -336,11 +340,11 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
     return (
         <group rotation={[data.tilt, 0, 0]}>
             {/* Orbital path ring — base line */}
-            <line geometry={orbitGeo}>
-                <lineBasicMaterial color="#ffffff" transparent opacity={shouldDim ? 0.02 : 0.5} linewidth={1} />
+            <line geometry={orbitGeo} renderOrder={0}>
+                <lineBasicMaterial color="#ffffff" transparent opacity={shouldDim ? 0.02 : 0.5} linewidth={1} depthWrite={false} />
             </line>
             {/* Orbital path ring — additive glow layer */}
-            <line geometry={orbitGeo}>
+            <line geometry={orbitGeo} renderOrder={0}>
                 <lineBasicMaterial
                     color="#ffffff"
                     transparent
@@ -360,8 +364,9 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
                         lockY={false}
                         lockZ={false}
                     >
+                        {/* Invisible fixed-size hit mesh for stable raycasting */}
                         <mesh
-                            ref={meshRef}
+                            renderOrder={2}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 if (!isZoomed) {
@@ -372,20 +377,34 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
                             }}
                             onPointerOver={(e) => {
                                 e.stopPropagation();
+                                if (hoverTimeout.current) {
+                                    clearTimeout(hoverTimeout.current);
+                                    hoverTimeout.current = null;
+                                }
                                 setHover(true);
                                 document.body.style.cursor = 'pointer';
                             }}
                             onPointerOut={(e) => {
                                 e.stopPropagation();
-                                setHover(false);
-                                document.body.style.cursor = 'auto';
+                                hoverTimeout.current = setTimeout(() => {
+                                    setHover(false);
+                                    document.body.style.cursor = 'auto';
+                                }, 180);
                             }}
-                            scale={hovered && !isZoomed ? 1.15 : 1}
+                        >
+                            <planeGeometry args={[data.size * 4.5, data.size * 4.5]} />
+                            <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+                        </mesh>
+                        {/* Visual planet mesh — scale animated via useFrame */}
+                        <mesh
+                            ref={meshRef}
+                            renderOrder={2}
                         >
                             <planeGeometry args={[data.size * 3.2, data.size * 3.2]} />
                             <meshBasicMaterial
                                 map={useTexture(data.planetImg)}
                                 transparent={true}
+                                alphaTest={0.01}
                                 opacity={shouldDim ? 0.2 : 1}
                                 depthWrite={false}
                             />
@@ -394,17 +413,27 @@ function Planet({ data, onSelect, isZoomed, selectedId }) {
 
                     {/* HTML Tooltip */}
                     {!isZoomed && hovered && (
-                        <Html distanceFactor={20} center position={[0, data.size + 1.2, 0]}>
-                            <div className="pointer-events-none bg-black/80 backdrop-blur-xl border border-white/20 rounded-2xl px-5 py-4 text-center min-w-[160px] shadow-[0_0_40px_rgba(0,0,0,0.5)]"
-                                style={{ borderColor: `${data.accentColor}40`, boxShadow: `0 0 20px ${data.accentColor}20` }}>
-                                <p className="text-[10px] font-mono tracking-[0.3em] uppercase mb-1.5" style={{ color: data.accentColor }}>{data.name} System</p>
-                                <p className="text-white font-display font-bold text-base whitespace-nowrap leading-none">{data.service}</p>
-
-                                <div className="mt-2 w-full h-[1px] bg-white/10" />
-                                <p className="text-white/40 text-[9px] mt-2 font-mono uppercase tracking-widest">Click to deploy</p>
+                        <Html distanceFactor={20} center position={[0, data.size + 7, 0]}>
+                            <div className="pointer-events-none backdrop-blur-2xl rounded-3xl px-8 py-6 md:px-12 md:py-10 text-center w-[300px] md:w-[460px] shadow-2xl"
+                                style={{
+                                    background: `linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%)`,
+                                    border: `1px solid ${data.accentColor}50`,
+                                    boxShadow: `0 0 40px ${data.accentColor}30, 0 20px 60px rgba(0,0,0,0.6)`
+                                }}>
+                                {/* Planet image */}
+                                <div className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-3 md:mb-5 rounded-full overflow-hidden"
+                                    style={{ boxShadow: `0 0 20px ${data.accentColor}60` }}>
+                                    <img src={data.planetImg} alt={data.name} className="w-full h-full object-cover" />
+                                </div>
+                                <p className="text-xs md:text-base font-mono tracking-[0.35em] uppercase mb-2 md:mb-4" style={{ color: data.accentColor }}>{data.name} System</p>
+                                <p className="text-white font-display font-bold text-2xl md:text-4xl leading-tight mb-3 md:mb-5">{data.service}</p>
+                                <div className="w-full h-[1px] mb-3 md:mb-5" style={{ background: `linear-gradient(to right, transparent, ${data.accentColor}60, transparent)` }} />
+                                <p className="text-white/80 text-sm md:text-lg font-light leading-snug mb-3 md:mb-5">{data.shortDesc}</p>
+                                <p className="text-xs md:text-sm mt-2 font-mono uppercase tracking-widest" style={{ color: data.accentColor }}>Click to explore →</p>
                             </div>
                         </Html>
                     )}
+
 
 
                     {/* Earth Cloud Layer — only for Earth */}
@@ -475,57 +504,67 @@ export default function VirtualUniverseSection() {
                     <div className="w-8 h-[1px] bg-cosmic-blue/70 shadow-[0_0_8px_#4FD1FF]" />
                     <span className="font-mono text-[9px] tracking-[0.35em] uppercase text-cosmic-blue/80">Virtual Event Universe</span>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-display font-black text-white tracking-tighter leading-none">
-                    Orbit <span className="italic font-light text-white/40">Galaxy</span>
+                <h1 className="text-4xl md:text-5xl font-display font-bold text-white leading-none drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                    Orbit Galaxy
                 </h1>
-                <p className="text-white/30 text-sm font-light mt-3 max-w-[260px] leading-relaxed hidden md:block">
+                <p className="text-white text-sm font-light mt-3 max-w-[260px] leading-relaxed hidden md:block">
                     Explore our universe of services, each designed to deliver powerful, high-impact experiences.
                 </p>
             </motion.div>
 
             {/* Instructions */}
-            <AnimatePresence>
-                {!isZoomed && isLoaded && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none text-center"
-                    >
-                        <p className="font-mono text-[10px] tracking-[0.3em] text-white/30 uppercase">
-                            Hover to identify &bull; Click to deploy module
-                        </p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+
 
             {/* Service Planet Legend */}
             <AnimatePresence>
                 {!isZoomed && isLoaded && (
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 20 }}
-                        className="absolute top-[28%] -translate-y-1/2 right-6 z-10 hidden lg:flex flex-col gap-3 xl:right-10 xl:gap-3.5"
-                    >
-                        {PLANETS.map((p) => (
-                            <div key={p.id} className="flex items-center gap-5 group cursor-pointer" onClick={() => handleSelectPlanet(p.id, null)}>
-                                <div className="relative h-12 w-12 rounded-full overflow-hidden border border-white/10 shadow-[0_0_24px_rgba(79,209,255,0.12)] group-hover:border-white/30 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.18)] transition-all duration-300 xl:h-14 xl:w-14">
-                                    <img src={p.planetImg} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                    <>
+                        {/* Desktop Legend */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 20 }}
+                            className="absolute top-[28%] -translate-y-1/2 right-6 z-10 hidden lg:flex flex-col gap-3 xl:right-10 xl:gap-3.5"
+                        >
+                            {PLANETS.map((p) => (
+                                <div key={p.id} className="flex items-center gap-5 group cursor-pointer" onClick={() => handleSelectPlanet(p.id, null)}>
+                                    <div className="relative h-12 w-12 rounded-full overflow-hidden border border-white/10 shadow-[0_0_24px_rgba(79,209,255,0.12)] group-hover:border-white/30 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.18)] transition-all duration-300 xl:h-14 xl:w-14">
+                                        <img src={p.planetImg} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="font-mono text-[10px] tracking-widest uppercase text-white/30 group-hover:text-white/70 transition-colors">{p.name}</span>
+                                        <span className="font-display text-sm text-white/60 group-hover:text-white transition-colors xl:text-[15px]">{p.service}</span>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col">
-                                    <span className="font-mono text-[10px] tracking-widest uppercase text-white/30 group-hover:text-white/70 transition-colors">{p.name}</span>
-                                    <span className="font-display text-sm text-white/60 group-hover:text-white transition-colors xl:text-[15px]">{p.service}</span>
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </motion.div>
 
-                    </motion.div>
+                        {/* Mobile Horizontal Selector */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            className="absolute bottom-8 left-0 right-0 z-20 flex lg:hidden flex-col items-center px-4"
+                        >
+                            <span className="font-mono text-[9px] text-white/40 tracking-[0.25em] uppercase mb-2">Tap a service to explore</span>
+                            <div className="flex gap-2.5 overflow-x-auto w-full max-w-md no-scrollbar py-2 px-1 justify-start">
+                                {PLANETS.map((p) => (
+                                    <button
+                                        key={p.id}
+                                        onClick={() => handleSelectPlanet(p.id, null)}
+                                        className="flex items-center gap-2 shrink-0 bg-black/60 border border-white/10 rounded-full px-3.5 py-2 hover:border-cosmic-blue transition-colors backdrop-blur-md"
+                                    >
+                                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: p.accentColor }} />
+                                        <span className="text-white text-xs font-medium whitespace-nowrap">{p.service}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
-
+ 
             {/* Planet Image Panel — LEFT SIDE */}
             <AnimatePresence>
                 {isZoomed && selectedService && (
@@ -535,7 +574,7 @@ export default function VirtualUniverseSection() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            className="absolute inset-y-0 left-0 w-full md:w-[calc(100vw-460px)] z-30 overflow-hidden pointer-events-none"
+                            className="absolute inset-y-0 left-0 w-full md:w-[calc(100vw-460px)] z-30 overflow-hidden pointer-events-none hidden md:block"
                         >
                             {/* Centered zoomed-out image frame */}
                             <div
@@ -567,7 +606,7 @@ export default function VirtualUniverseSection() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -80 }}
                             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            className="absolute inset-y-0 left-0 w-full md:w-[420px] z-30 flex flex-col items-center justify-center pointer-events-none"
+                            className="absolute inset-y-0 left-0 w-full md:w-[420px] z-30 flex flex-col items-center justify-center pointer-events-none hidden md:block"
                         >
                             {/* Background glow */}
                             <div
@@ -576,14 +615,14 @@ export default function VirtualUniverseSection() {
                                     background: `radial-gradient(ellipse at 30% 50%, ${selectedService.accentColor}18 0%, transparent 70%)`,
                                 }}
                             />
-
+ 
                             <div className="relative flex flex-col items-center gap-6 px-10">
                                 {/* Outer glow ring */}
                                 <div
                                     className="absolute w-[340px] h-[340px] rounded-full blur-3xl opacity-20 pointer-events-none"
                                     style={{ backgroundColor: selectedService.accentColor }}
                                 />
-
+ 
                                 {/* Planet image */}
                                 <motion.img
                                     key={selectedService.id}
@@ -597,7 +636,7 @@ export default function VirtualUniverseSection() {
                                         filter: `drop-shadow(0 0 40px ${selectedService.accentColor}60)`,
                                     }}
                                 />
-
+ 
                                 {/* Label */}
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
@@ -617,9 +656,9 @@ export default function VirtualUniverseSection() {
                     )
                 )}
             </AnimatePresence>
-
+ 
             {/* Service Detail Modal */}
-
+ 
             <AnimatePresence>
                 {isZoomed && selectedService && (
                     <motion.div
@@ -627,32 +666,32 @@ export default function VirtualUniverseSection() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 80 }}
                         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                        className="absolute inset-y-0 right-0 w-full md:w-[460px] bg-black/85 backdrop-blur-3xl border-l border-white/10 z-30 flex flex-col overflow-y-auto custom-scrollbar"
+                        className="absolute inset-y-0 right-0 w-full md:w-[460px] bg-black/90 backdrop-blur-3xl border-l border-white/10 z-50 flex flex-col overflow-y-auto custom-scrollbar"
                         style={{ borderColor: `${selectedService.accentColor}20` }}
                     >
                         {/* Close */}
                         <button
                             onClick={handleClose}
-                            className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all border border-white/10 z-10"
+                            className="absolute top-6 right-6 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all border border-white/10 z-40"
                         >
                             <X size={18} />
                         </button>
-
-                        <div className="flex flex-col h-full p-10 md:p-12 md:pt-24 pt-20 justify-start">
+ 
+                        <div className="flex flex-col h-full p-6 sm:p-10 md:p-12 md:pt-24 pt-20 justify-start">
                             {/* Planet indicator */}
-                            <div className="flex items-center gap-3 mb-10">
+                            <div className="flex items-center gap-3 mb-6 sm:mb-10">
                                 <div className="w-3 h-3 rounded-full animate-pulse" style={{ backgroundColor: selectedService.accentColor, boxShadow: `0 0 15px ${selectedService.accentColor}` }} />
                                 <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-white/30">{selectedService.name} — Orbit Locked</span>
                             </div>
-
+ 
                              {/* Planet Image & Service Label */}
-                             <div className="flex items-center gap-6 mb-8">
-                                 <div className="relative w-24 h-24 rounded-3xl overflow-hidden border-2 p-1" style={{ borderColor: `${selectedService.accentColor}30` }}>
+                             <div className="flex items-center gap-6 mb-6 sm:mb-8">
+                                 <div className="relative w-16 h-16 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl overflow-hidden border-2 p-1" style={{ borderColor: `${selectedService.accentColor}30` }}>
                                      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent z-10 pointer-events-none" />
                                      <img 
                                         src={selectedService.planetImg} 
                                         alt={selectedService.name} 
-                                        className="w-full h-full object-cover rounded-2xl"
+                                        className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
                                      />
                                  </div>
                                  <div>
@@ -661,17 +700,35 @@ export default function VirtualUniverseSection() {
                                  </div>
                              </div>
 
-
+                             {/* Mobile-only service banner image */}
+                             <div className="relative w-full h-44 mb-6 rounded-2xl overflow-hidden md:hidden block shrink-0 border border-white/10">
+                                 <img
+                                     src={{
+                                         corporate: '/collage/event.jpeg',
+                                         brand: '/collage/brand.jpeg',
+                                         sponsorship: '/collage/sponsorship.jpeg',
+                                         entertainment: '/collage/entertainment.jpeg',
+                                         marketing: '/collage/marketing.jpeg',
+                                         exhibitions: '/planets/exhibitionss.png',
+                                         launch: '/planets/launchh.png',
+                                         'awards-team-building': '/collage/awards.jpeg',
+                                     }[selectedService.id]}
+                                     alt={selectedService.service}
+                                     className="w-full h-full object-cover"
+                                 />
+                                 <div className="absolute inset-0 bg-gradient-to-t from-[#060913] via-transparent to-transparent" />
+                             </div>
+ 
                             {/* Title */}
-                            <h2 className="text-4xl md:text-6xl font-display font-black text-white tracking-tighter leading-[0.95] mb-4 pt-2">
+                            <h2 className="text-3xl sm:text-4xl md:text-6xl font-display font-black text-white tracking-tighter leading-[0.95] mb-3 sm:mb-4">
                                 {selectedService.service}
                             </h2>
-                            <p className="text-lg font-display font-light italic mb-8" style={{ color: selectedService.accentColor }}>
+                            <p className="text-base sm:text-lg font-display font-light italic mb-6 sm:mb-8" style={{ color: selectedService.accentColor }}>
                                 {selectedService.shortDesc}
                             </p>
-
+ 
                             {/* Divider line */}
-                            <div className="w-full h-[1px] bg-white/5 mb-8 relative overflow-hidden">
+                            <div className="w-full h-[1px] bg-white/5 mb-6 sm:mb-8 relative overflow-hidden">
                                 <motion.div
                                     initial={{ x: '-100%' }}
                                     animate={{ x: '100%' }}
@@ -680,13 +737,13 @@ export default function VirtualUniverseSection() {
                                     style={{ background: `linear-gradient(to right, transparent, ${selectedService.accentColor}, transparent)` }}
                                 />
                             </div>
-
-                            <p className="text-white/50 leading-relaxed font-light text-base mb-12">
+ 
+                            <p className="text-white/50 leading-relaxed font-light text-sm sm:text-base mb-8 sm:mb-12">
                                 {selectedService.fullDesc}
                             </p>
-
+ 
                             {/* Status bars */}
-                            <div className="space-y-4 mb-12">
+                            <div className="space-y-4 mb-8 sm:mb-12">
                                 {["Strategic Planning", "Creative Execution", "Impact Delivery"].map((label, i) => (
                                     <div key={label}>
                                         <div className="flex justify-between mb-1.5">
@@ -705,12 +762,14 @@ export default function VirtualUniverseSection() {
                                     </div>
                                 ))}
                             </div>
-
-                            <button className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-bold text-black group transition-all duration-300 hover:scale-[1.02] shadow-xl"
-                                style={{ backgroundColor: selectedService.accentColor, boxShadow: `0 0 30px ${selectedService.accentColor}40` }}>
-                                Deploy Protocol
-                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                            </button>
+ 
+                            <Link to="/contact" className="w-full block">
+                                <button className="flex items-center justify-center gap-3 w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-black group transition-all duration-300 hover:scale-[1.02] shadow-xl text-sm"
+                                    style={{ backgroundColor: selectedService.accentColor, boxShadow: `0 0 30px ${selectedService.accentColor}40` }}>
+                                    Deploy Protocol
+                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                </button>
+                            </Link>
                         </div>
                     </motion.div>
                 )}
@@ -718,12 +777,12 @@ export default function VirtualUniverseSection() {
 
             {/* 3D Canvas */}
             <Canvas
-                camera={{ position: [0, 15, 35], fov: 52 }}
+                camera={{ position: [0, 20, 45], fov: 55 }}
                 gl={{ antialias: true, alpha: false }}
                 onCreated={() => setTimeout(() => setIsLoaded(true), 1200)}
             >
                 <color attach="background" args={['#060913']} />
-                <fog attach="fog" args={['#060913', 50, 150]} />
+                <fog attach="fog" args={['#060913', window.innerWidth < 768 ? 150 : 65, window.innerWidth < 768 ? 300 : 200]} />
 
                 {/* Starfield */}
                 <Stars radius={100} depth={60} count={6000} factor={4} saturation={0} fade speed={0.5} />

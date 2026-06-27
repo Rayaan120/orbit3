@@ -110,9 +110,9 @@ export default function OrbitTimelineSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 tracking-tight text-white"
+                        className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 tracking-tight text-white drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                     >
-                        Orbit <span className="text-cosmic-blue italic font-light">Milestones</span>
+                        Orbit Milestones
                     </motion.h2>
 
                     <motion.div
@@ -122,7 +122,7 @@ export default function OrbitTimelineSection() {
                         transition={{ delay: 0.2 }}
                         className="text-xl md:text-2xl font-display text-white/80 mb-6 font-medium tracking-wide"
                     >
-                        Built on Vision. <span className="text-cosmic-blue">Driven by Impact.</span>
+                        Built on Vision. Driven by Impact.
                     </motion.div>
 
                     <motion.p
@@ -253,12 +253,26 @@ export default function OrbitTimelineSection() {
                     {/* Vertical Glowing Line */}
                     <div className="absolute top-0 bottom-0 left-8 md:left-1/2 w-[1px] bg-white/10 md:-translate-x-1/2">
                         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-cosmic-blue/50 to-transparent opacity-50" />
-                        {/* Moving light pulse */}
+                        {/* Moving Spaceship on Mobile */}
                         <motion.div
-                            animate={{ top: ["0%", "100%"] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                            className="absolute left-1/2 -translate-x-1/2 h-32 w-[2px] bg-gradient-to-b from-transparent via-cosmic-blue to-transparent shadow-[0_0_10px_#4FD1FF]"
-                        />
+                            animate={{ top: ["-5%", "105%"] }}
+                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                            className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center"
+                        >
+                            {/* Engine Trail (coming from top) */}
+                            <div className="w-[2px] h-20 bg-gradient-to-b from-transparent via-cosmic-blue/40 to-cyan-400 shadow-[0_0_10px_#4FD1FF] opacity-40" />
+                            
+                            {/* Spaceship Image rotated 90deg to face down */}
+                            <div className="relative w-24 h-32 -mt-3">
+                                <img 
+                                    src="/spaceship.png" 
+                                    alt="Spaceship" 
+                                    className="w-full h-full object-contain mix-blend-screen drop-shadow-[0_0_20px_rgba(79,209,255,0.5)] rotate-90"
+                                />
+                                {/* Subtle Engine Pulse Glow */}
+                                <div className="absolute left-1/2 -translate-x-1/2 top-2 w-5 h-5 bg-cyan-400 blur-sm rounded-full animate-pulse opacity-70" />
+                            </div>
+                        </motion.div>
                     </div>
 
                     <div className="flex flex-col gap-16 relative z-10">
@@ -325,7 +339,7 @@ export default function OrbitTimelineSection() {
                 </div>
 
             </div>
-            <div className="relative z-10 max-w-[1400px] mx-auto px-6 pb-12">
+            <div className="relative z-10 max-w-[1400px] mx-auto px-6 pb-12 mt-16 lg:mt-0">
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}

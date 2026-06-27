@@ -80,11 +80,11 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#030014]">
+        <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#030014] pt-20 pb-10 lg:py-0">
             {/* Background glowing elements */}
             <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-nebula-purple/30 rounded-full blur-[150px] mix-blend-screen" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-cosmic-blue/20 rounded-full blur-[120px] mix-blend-screen" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-nebula-purple/30 rounded-full blur-[80px] md:blur-[150px] mix-blend-screen" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] md:w-[800px] md:h-[400px] bg-cosmic-blue/20 rounded-full blur-[60px] md:blur-[120px] mix-blend-screen" />
             </div>
 
             {/* Orbit Rings Background */}
@@ -94,50 +94,50 @@ export default function Hero() {
             </div>
 
             {/* The 3D Rotating Earth Background */}
-            <div className="absolute inset-0 z-10">
+            <div className="absolute inset-0 z-10 pointer-events-none">
                 <EarthCanvas />
             </div>
 
-            <div className="relative z-20 max-w-[100rem] w-full mx-auto px-6 h-full flex flex-col lg:flex-row items-center pointer-events-none">
+            <div className="relative z-20 max-w-[100rem] w-full mx-auto px-6 h-full flex flex-col lg:flex-row items-center justify-center pointer-events-none gap-4 lg:gap-0">
                 {/* Left Side: Astronaut */}
-                <div className="w-full lg:w-1/2 h-full flex items-center justify-center relative pointer-events-none lg:-ml-20">
+                <div className="w-full lg:w-1/2 h-auto lg:h-full flex items-center justify-center relative pointer-events-none lg:-ml-20">
                     <motion.div
                         animate={{ 
-                            y: [0, -25, 0],
-                            rotate: [0, 3, -2, 0]
+                            y: [0, -10, 0],
+                            rotate: [0, 2, -1, 0]
                         }}
                         transition={{ 
                             duration: 8, 
                             repeat: Infinity, 
                             ease: "easeInOut" 
                         }}
-                        className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px] z-20"
+                        className="relative w-[150px] h-[150px] sm:w-[260px] sm:h-[260px] md:w-[400px] md:h-[400px] lg:w-[650px] lg:h-[650px] z-20"
                     >
                         <img 
                             src={astronautImg} 
                             alt="Astronaut floating" 
-                            className="w-full h-full object-contain filter drop-shadow-[0_0_50px_rgba(0,150,255,0.4)]"
+                            className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(0,150,255,0.35)]"
                         />
                     </motion.div>
                 </div>
 
                 {/* Typography Block - Aligned to the right */}
-                <div className="w-full lg:w-[40%] flex flex-col justify-center items-start lg:ml-auto mt-10 lg:mt-0 relative z-20">
+                <div className="w-full lg:w-[45%] flex flex-col justify-center items-center lg:items-start lg:ml-auto mt-2 lg:mt-0 relative z-20 text-center lg:text-left pointer-events-none">
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                        className="text-3xl md:text-5xl lg:text-[64px] font-display tracking-tight mb-6 leading-[0.9] text-white flex flex-col uppercase"
+                        className="text-5xl sm:text-4xl md:text-5xl lg:text-[64px] font-display tracking-tight mb-4 lg:mb-6 leading-[0.95] text-white flex flex-col uppercase w-full"
                     >
                         <span className="font-light text-transparent" style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.9)' }}>
                             WE ARE
                         </span>
                         
-                        <div ref={wordsContainerRef} className="relative h-[1.1em] mt-2 overflow-visible">
+                        <div ref={wordsContainerRef} className="relative h-[1.25em] mt-1 lg:mt-2 overflow-visible w-full">
                             {words.map((word, index) => (
                                 <span 
                                     key={index}
-                                    className="word font-extrabold tracking-tighter absolute top-0 left-0 whitespace-nowrap overflow-visible"
+                                    className="word font-extrabold tracking-tighter absolute top-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 whitespace-nowrap overflow-visible"
                                 >
                                     {splitText(word)}
                                 </span>
@@ -149,7 +149,7 @@ export default function Hero() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 0.4 }}
-                        className="text-lg md:text-xl text-white/95 max-w-lg mb-10 font-medium leading-relaxed"
+                        className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-lg mb-6 sm:mb-8 lg:mb-10 font-light leading-relaxed px-4 lg:px-0"
                     >
                         We are excited to begin our space odyssey that takes off the ground exploring uncharted regions of the event universe bringing your ideas to life.
                     </motion.p>
@@ -158,10 +158,10 @@ export default function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.6 }}
-                        className="pointer-events-auto"
+                        className="pointer-events-auto text-xs sm:text-sm"
                     >
-                        <Link to="/services" className="px-8 py-3.5 border border-white text-white text-sm font-semibold tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-4">
-                            EXPLORE MORE <span className="text-xl leading-none">→</span>
+                        <Link to="/services" className="px-6 py-3 border border-white text-white font-semibold tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-3">
+                            EXPLORE MORE <span className="text-lg leading-none">→</span>
                         </Link>
                     </motion.div>
                 </div>
@@ -172,7 +172,7 @@ export default function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 1.5 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-starlight/50 animate-bounce"
+                className="hidden md:flex absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-starlight/50 animate-bounce z-20"
             >
                 <span className="text-xs tracking-widest uppercase">Scroll</span>
                 <ChevronDown size={20} />

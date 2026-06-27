@@ -43,15 +43,9 @@ export default function Contact() {
                         className="flex flex-col items-center"
                     >
                         <div className="max-w-3xl flex flex-col items-start text-left">
-                            <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight text-white leading-tight">
+                            <h1 className="text-4xl md:text-6xl font-display font-bold tracking-tight text-white leading-tight mb-8">
                                 Contact <span className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">Orbit Events Dubai</span>
                             </h1>
-
-                            <div className="w-full text-left mt-2 mb-8 pl-1">
-                                <span className="text-cosmic-blue text-2xl md:text-3xl block font-display">
-                                    Event Management & Production Company
-                                </span>
-                            </div>
                             
                             <p className="text-starlight/70 text-lg md:text-xl font-light leading-relaxed pl-1">
                                 Get in touch with Orbit Events for premium event management, corporate events, brand activations, entertainment experiences, and production services across Dubai, the UAE, and beyond. Our team is ready to help plan and execute your next event with precision and creativity.
@@ -80,10 +74,10 @@ export default function Contact() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                             >
-                                <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6 uppercase tracking-tight">
-                                    Contact <span className="text-cosmic-blue text-glow">Information</span>
+                                <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+                                    Contact Information
                                 </h2>
-                                <p className="text-starlight/60 text-lg font-light max-w-md leading-relaxed">
+                                <p className="text-starlight/60 max-w-2xl text-lg font-light leading-relaxed">
                                     Orbit Events operates across Dubai, the UAE, and international markets—delivering premium event management, brand activations, entertainment experiences, and corporate productions with precision and creativity.
                                 </p>
                             </motion.div>
@@ -113,7 +107,7 @@ export default function Contact() {
                                 { 
                                     icon: <Mail size={22} />, 
                                     title: "Email Address", 
-                                    content: "info@orbiteventsuae.com", 
+                                    content: "info@orbit.events", 
                                     sub: "Send us your event inquiries anytime",
                                     color: "text-orbit-gold",
                                     bg: "bg-orbit-gold/10"
@@ -170,25 +164,28 @@ export default function Contact() {
                             </div>
 
                             <div className="glass-card p-8 md:p-12 rounded-b-3xl border-t-0 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] flex-grow flex flex-col">
-                                <h3 className="text-3xl font-display font-bold text-white mb-2">Start Your <span className="text-cosmic-blue">Event Journey</span></h3>
-                                <p className="text-starlight/50 text-sm mb-10 font-light shrink-0">Fill out the form below and our team will get in touch to discuss your event requirements, creative vision, and execution strategy.</p>
+                                <h3 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">Start Your Event Journey</h3>
+                                <p className="text-starlight/60 max-w-2xl text-lg font-light leading-relaxed mb-10 shrink-0">Fill out the form below and our team will get in touch to discuss your event requirements, creative vision, and execution strategy.</p>
 
-                                <form className="space-y-8 flex-grow flex flex-col">
+                                <form action="https://formspree.io/f/mpqevgql" method="POST" className="space-y-8 flex-grow flex flex-col">
+                                    {/* Honeypot field to prevent spam */}
+                                    <input type="text" name="_gotcha" style={{ display: 'none' }} />
+
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 shrink-0">
                                         <div className="relative group">
-                                            <input type="text" className="peer w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all" placeholder=" " />
+                                            <input type="text" name="name" required className="peer w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all" placeholder=" " />
                                             <label className="absolute left-0 top-3 text-starlight/30 text-sm pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cosmic-blue peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs uppercase tracking-widest font-bold">Full Name</label>
                                             <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-cosmic-blue transition-all duration-500 group-focus-within:w-full" />
                                         </div>
                                         <div className="relative group">
-                                            <input type="email" className="peer w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all" placeholder=" " />
+                                            <input type="email" name="email" required className="peer w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all" placeholder=" " />
                                             <label className="absolute left-0 top-3 text-starlight/30 text-sm pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cosmic-blue peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs uppercase tracking-widest font-bold">Email Address</label>
                                             <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-cosmic-blue transition-all duration-500 group-focus-within:w-full" />
                                         </div>
                                     </div>
 
                                     <div className="relative group shrink-0">
-                                        <select className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all appearance-none cursor-pointer">
+                                        <select name="eventType" className="w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all appearance-none cursor-pointer">
                                             <option className="bg-deep-space text-white">Corporate Events</option>
                                             <option className="bg-deep-space text-white">Brand Experiences</option>
                                             <option className="bg-deep-space text-white">Sponsorship Activations</option>
@@ -201,13 +198,13 @@ export default function Contact() {
                                     </div>
 
                                     <div className="relative group flex-grow flex flex-col">
-                                        <textarea className="peer w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all resize-none flex-grow" placeholder=" "></textarea>
+                                        <textarea name="message" required className="peer w-full bg-transparent border-b border-white/10 py-3 text-white focus:outline-none focus:border-cosmic-blue transition-all resize-none flex-grow" placeholder=" "></textarea>
                                         <label className="absolute left-0 top-3 text-starlight/30 text-sm pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cosmic-blue peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs uppercase tracking-widest font-bold">Project Details</label>
                                         <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-cosmic-blue transition-all duration-500 group-focus-within:w-full" />
                                     </div>
 
                                     <div className="pt-4 shrink-0">
-                                        <button type="button" className="w-full group relative overflow-hidden rounded-xl bg-cosmic-blue py-5 text-deep-space font-display font-black tracking-[0.2em] uppercase transition-all hover:shadow-[0_0_40px_rgba(79,209,255,0.4)] active:scale-[0.98]">
+                                        <button type="submit" className="w-full group relative overflow-hidden rounded-xl bg-cosmic-blue py-5 text-deep-space font-display font-black tracking-[0.2em] uppercase transition-all hover:shadow-[0_0_40px_rgba(79,209,255,0.4)] active:scale-[0.98]">
                                             <div className="absolute inset-0 bg-white translate-y-full transition-transform duration-500 group-hover:translate-y-0" />
                                             <span className="relative z-10 flex items-center justify-center gap-3 group-hover:text-deep-space">
                                                 Send Inquiry <Send size={20} className="transition-transform group-hover:translate-x-2 group-hover:-translate-y-1" />
@@ -281,7 +278,7 @@ export default function Contact() {
                 className="fixed bottom-8 right-8 z-[999]"
             >
                 <a 
-                    href="https://wa.me/97142958339" 
+                    href="https://wa.me/971555763536" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="relative group flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-[0_0_20px_rgba(37,211,102,0.4)] hover:shadow-[0_0_30px_rgba(37,211,102,0.6)] transition-all duration-300 hover:scale-110 active:scale-95"
